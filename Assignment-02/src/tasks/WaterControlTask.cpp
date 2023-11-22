@@ -64,7 +64,7 @@ void WaterControlTask::tick(){
     }
 }
 
-void WaterControlTask::setState(enum s){
+void WaterControlTask::setState(int s){
     state = s;
     stateTimestamp = millis();
 }
