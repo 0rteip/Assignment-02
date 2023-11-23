@@ -3,22 +3,23 @@
 
 #include "kernel/Task.h"
 #include "model/CarWash.h"
-
+#include "tasks/BlinkLedTask.h"
 class DetectTask: public Task {
 
 public:
-  DetectTask(CarWash* carWash); 
+  DetectTask(CarWash* carWash, BlinkLedTask* blinkTask); 
   void tick();
 
 private:  
 
-  void setState(int state);
+  enum State { IDLE, DETECTED, CAR_IN} state;
+  void setState(State state);
   long elapsedTimeInState();
 
-  enum { IDLE, DETECTED, CAR_IN} state;
   long stateTimestamp;
 
   CarWash* carWash;
+  BlinkLedTask* blink;
 };
 
 #endif
