@@ -4,12 +4,21 @@
 Led::Led(int pin){
   this->pin = pin;
   pinMode(pin,OUTPUT);
+  this->on = false;
+}
+
+bool Led::isOn() {
+    return on;
 }
 
 void Led::switchOn(){
-  digitalWrite(pin,HIGH);
+    Serial.println("Accendo");
+    digitalWrite(pin,HIGH);
+    this->on = true;
 }
 
 void Led::switchOff(){
-  digitalWrite(pin,LOW);
+    digitalWrite(pin,LOW);
+    this->on = false;
+    Serial.println("Spengo");
 };
