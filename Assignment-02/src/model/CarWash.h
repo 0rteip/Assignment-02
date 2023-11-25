@@ -1,10 +1,10 @@
-#ifndef __BRIDGE__
-#define __BRIDGE__
+#ifndef __CAR_WASH__
+#define __CAR_WASH__
 
 #include <Arduino.h>
 #include "devices/Led.h"
 #include "devices/Pir.h"
-#include "devices/Sonar.h"
+#include "devices/ProximitySensor.h"
 #include "devices/DisplayLcdI2C.h"
 #include "devices/servo_motor.h"
 #include "config.h"
@@ -18,6 +18,7 @@ public:
     void displayMessage(char string[]);
     void setCarInState();
     void scrollDisplay();
+    unsigned long getCarDistance();
     
 private:
     bool detect;
@@ -26,6 +27,7 @@ private:
     Led* leds[LED_NUM];
     DisplayLcdI2C* lcd;
     ServoMotor* gate;
+    ProximitySensor* prox;
 };
 
 
