@@ -11,8 +11,8 @@
 
 #define PIR_PIN 2
 
-#define SONAR_TRIG_PIN 7
-#define SONAR_ECHO_PIN 8
+#define PROX_TRIG_PIN 7
+#define PROX_ECHO_PIN 8
 
 #define GATE_PIN 9
 
