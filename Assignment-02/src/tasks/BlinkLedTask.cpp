@@ -14,9 +14,6 @@ void BlinkLedTask::init(int period) {
     this->led = new Led(pin); 
     state = OFF;
 }
- void BlinkLedTask::setPeriod(unsigned long newPeriod) {
-    this->myPeriod = newPeriod;
- }
 
 void BlinkLedTask::tick(){
     switch (state)

@@ -113,21 +113,3 @@ unsigned long CarWash::getCarDistance()
     }
     return this->prox->getDistance();
 }
-
-bool CarWash::isWashingStarted()
-{
-    Serial.println("Press button to start washing");
-    // true if button has been pressed  
-    delay(2000);
-    return true;
-}
-
-unsigned long CarWash::getCarDistance()
-{
-    if (this->washingAreaTemperture != this->tempSensor->getCelsius())
-    {
-        this->washingAreaTemperture = this->tempSensor->getCelsius();
-        this->prox->setTemperature(this->washingAreaTemperture);
-    }
-    return this->prox->getDistance();
-}

@@ -13,13 +13,14 @@ public:
 private:  
 
   enum State { IDLE, DETECTED, CAR_IN} state;
-  void setState(State state);
-  long elapsedTimeInState();
-
   long stateTimestamp;
 
   CarWash* carWash;
   BlinkLedTask* blink;
+  
+  void setState(State state);
+  long elapsedTimeInState();
+
 };
 
 #endif

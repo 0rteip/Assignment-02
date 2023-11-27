@@ -11,8 +11,8 @@ public:
     ControlTask(int pin, BlinkLedTask* blinkTask);
     void init();
     void tick();
+    
 private:
-
     int pin;
     BlinkLedTask* blink;
     Button* button;
