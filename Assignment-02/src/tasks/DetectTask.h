@@ -1,5 +1,5 @@
-#ifndef __LIGHT_CONTROL_TASK__
-#define __LIGHT_CONTROL_TASK__
+#ifndef __DETECT_TASK__
+#define __DETECT_TASK__
 
 #include "kernel/TaskWithState.h"
 #include "model/CarWash.h"
@@ -15,11 +15,11 @@ private:
   enum State { IDLE, DETECTED, CAR_IN} state;
   long stateTimestamp;
 
-  CarWash* carWash;
-  BlinkLedTask* blink;
-  
+
   void setState(State state);
   long elapsedTimeInState();
+  CarWash* carWash;
+  BlinkLedTask* blink;
 
 };
 

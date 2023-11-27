@@ -5,7 +5,7 @@
 #include "kernel/Logger.h"
 #include "devices/ButtonImpl.h"
 
-ControlTask::ControlTask(int pin, BlinkLedTask* blinkTask): blink(blink){
+ControlTask::ControlTask(int pin, BlinkLedTask* blinkTask): blink(blinkTask){
     this->pin = pin;
     this->blink = blink;
 }
