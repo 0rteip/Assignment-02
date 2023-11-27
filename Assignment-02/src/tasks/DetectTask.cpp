@@ -16,21 +16,14 @@ void DetectTask::tick(){
     case IDLE:
         if (carWash->getPrecence()) {
             carWash->setCarDetectState();
-            state = DETECTED;
-
+            setState(DETECTED);
         }
-        /*if(elapsedTimeInState() > 5000) {
-            blink->setPeriod(500);
-            setState(CAR_IN);
-        }*/
-
-
         break;
     case DETECTED: 
         if (elapsedTimeInState() >= N1 ) {
-            state = CAR_IN;
             carWash->setCarInState();
             blink->setActive(true);
+            setState(CAR_IN);
         }
         break;
     case CAR_IN:

@@ -1,7 +1,8 @@
 #ifndef __DETECT_TASK__
 #define __DETECT_TASK__
 
-#include "kernel/TaskWithState.h"
+#include "kernel/Task.h"
+#include "kernel/TaskWithReinit.h"
 #include "model/CarWash.h"
 #include "tasks/BlinkLedTask.h"
 class DetectTask: public Task {
