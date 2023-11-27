@@ -4,18 +4,24 @@
 #include "devices/Button.h"
 #include "model/CarWash.h"
 #include "tasks/BlinkLedTask.h"
+#include "UserConsole.h"
 
 class ControlTask: public Task {
 
 public:
-    ControlTask(int pin, BlinkLedTask* blinkTask);
-    void init();
+    ControlTask(BlinkLedTask* blink, UserConsole* userConsol, CarWash* carWash);
     void tick();
     
 private:
-    int pin;
+    enum  State {IDLE, CAR_IN, CAR_DETECT} state;
+
+    void setState(State state);
+    long elapsedTimeInState();
+    long stateTimestamp;
+
     BlinkLedTask* blink;
-    Button* button;
+    UserConsole* userConsole;
+    CarWash* carWash;
 };
 
 #endif
