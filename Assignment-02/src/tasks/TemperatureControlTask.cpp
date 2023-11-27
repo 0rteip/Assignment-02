@@ -1,9 +1,25 @@
 #include "TemperatureControlTask.h"
+#include "config.h"
+
+#ifdef __LM35__
+#include "devices/TempSensorLM35.h"
+#endif
+
+#ifdef __TMP36__
 #include "devices/TempSensorTMP36.h"
+#endif
 
 TemperatureControlTask::TemperatureControlTask(CarWash *carWash)
     : carWash(carWash)
 {
+#ifdef __TMP36__
+    this->tempSensor = new TempSensorTMP36(TEMP_PIN);
+#endif
+
+#ifdef __LM35__
+    this->tempSensor = new TempSensorLM35(TEMP_PIN);
+#endif
+
     this->state = IDLE;
 }
 
