@@ -8,6 +8,8 @@
 #include "CarWash.h"
 #include <Arduino.h>
 
+const char welcome[] = "Welcome";
+
 CarWash::CarWash()
 {
 }
@@ -44,8 +46,7 @@ void CarWash::switchL1()
     }
 }
 
-void CarWash::displayMessage(char string[])
-{
+void CarWash::displayMessage(const char string[]) {
     lcd->clear();
     lcd->display(string);
 }

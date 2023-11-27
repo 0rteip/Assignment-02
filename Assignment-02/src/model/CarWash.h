@@ -20,7 +20,7 @@ public:
     void init();
     bool getPrecence();
     void switchL1();
-    void displayMessage(char string[]);
+    void displayMessage(const char string[]);
     void setCarInState();
     void setFullyEnteredState();
     void setWashingState();
@@ -28,6 +28,7 @@ public:
     void setCarOutState();
     bool isWashingStarted();
     void scrollDisplay();
+    void setCarDetectState();
     unsigned long getCarDistance();
 
 private:
