@@ -2,7 +2,6 @@
 #define __BUTTONIMPL__
 
 #include "Button.h"
-
 class ButtonImpl: public Button {
  
 public: 
