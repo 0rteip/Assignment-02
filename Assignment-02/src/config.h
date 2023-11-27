@@ -2,10 +2,10 @@
 #define __CONFIG__
 
 #define LED1_PIN 13
-#define BT_PIN 3
+#define BT_PIN 10
 
-#define LED2_PIN 6
-#define LED3_PIN 4
+#define LED2_PIN 12
+#define LED3_PIN 11
 
 #define LED_NUM 3
 
@@ -20,7 +20,7 @@
 
 #define GATE_PIN 9
 
-#define N1 2000
+#define N1 10000
 #define N2 5000
 #define N3 6000
 #define N4 6000
