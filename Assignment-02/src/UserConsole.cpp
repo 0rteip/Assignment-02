@@ -7,37 +7,67 @@
 #include "config.h"
 #include "kernel/Logger.h"
 
-UserConsole::UserConsole(){
-  lcd = new  DisplayLcdI2C();
+UserConsole::UserConsole()
+{
+  lcd = new DisplayLcdI2C();
   button = new ButtonImpl(BT_PIN);
-  needScrol=false;
+  needScrol = false;
 }
 
-void UserConsole::init(){
+void UserConsole::init()
+{
 }
 
-void UserConsole::sync(){
+void UserConsole::sync()
+{
   button->sync();
 }
 
-bool UserConsole::isButtonPressed() {
-    return button->isPressed();
+bool UserConsole::isButtonPressed()
+{
+  return button->isPressed();
 }
 
-void UserConsole::displayWelcome() {
-    lcd->clear();
-    lcd->display("Welcome");
-    needScrol = false;
+void UserConsole::displayWelcome()
+{
+  lcd->display("Welcome");
+  needScrol = false;
 }
 
-void UserConsole::displayProced() {
-    lcd->clear();
-    lcd->display("Proceed to the Washing Area");
-    needScrol = true;
+void UserConsole::displayProceed()
+{
+  lcd->display("Proceed to the Washing Area");
+  needScrol = true;
 }
 
-void UserConsole::turnOnDisplay(){
+void UserConsole::displayReadyToWash()
+{
+  lcd->display("Ready to Wash");
+  needScrol = false;
 }
 
-void UserConsole::turnOffDisplay(){
+void UserConsole::displayWashing()
+{
+  lcd->display("Washing");
+  needScrol = false;
+}
+
+void UserConsole::displayWashingCompleted()
+{
+  lcd->display("Washing complete, you can leave the area");
+  needScrol = false;
+}
+
+void UserConsole::displayProblem()
+{
+  lcd->display("Detected a Problem - Please Wait");
+  needScrol = false;
+}
+
+void UserConsole::turnOnDisplay()
+{
+}
+
+void UserConsole::turnOffDisplay()
+{
 }

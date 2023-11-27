@@ -18,7 +18,12 @@ public:
   void turnOnDisplay();
 
   void displayWelcome();
-  void displayProced();
+  void displayProceed();
+  void displayReadyToWash();
+  void displayWashing();
+  void displayWashingCompleted();
+  void displayProblem();
+
 
   bool isButtonPressed();
 
