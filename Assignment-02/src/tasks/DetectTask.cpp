@@ -5,8 +5,10 @@
 #include "tasks/BlinkLedTask.h"
 
 DetectTask::DetectTask(CarWash* carWash, BlinkLedTask* blink):
-    carWash(carWash),blink(blink)
+    carWash(carWash), blink(blink)
      {
+        this->carWash = carWash;
+        this->blink = blink;
         setState(IDLE);
 }
   

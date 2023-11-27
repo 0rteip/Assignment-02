@@ -12,7 +12,6 @@ public:
 private:
   int pin;
   bool pressed;
-  bool clicked;
 };
 
 #endif
