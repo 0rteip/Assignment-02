@@ -8,8 +8,6 @@
 #include "CarWash.h"
 #include <Arduino.h>
 
-const char welcome[] = "Welcome";
-
 CarWash::CarWash()
 {
 }
@@ -25,6 +23,7 @@ void CarWash::init()
     tempSensor = new TempSensorTMP36(TMP_PIN);
     this->washingAreaTemperture = this->tempSensor->getCelsius();
     gate = new ServoMotorImpl(GATE_PIN);
+    state = IDLE;
 }
 
 bool CarWash::getPrecence()
@@ -33,28 +32,22 @@ bool CarWash::getPrecence()
     return this->pir->isDetected();
 }
 
-void CarWash::switchL1()
-{
-    if (this->leds[0]->isOn())
-    {
-        // this->leds[0]->switchOff();
-    }
-    else
-    {
-        // this->leds[0]->switchOn();
-        Serial.println("L1 Acceso");
-    }
+void CarWash::setCarDetectState() {
+    leds[0]->switchOn();
+    state = CAR_DETECT;
 }
 
-void CarWash::displayMessage(const char string[]) {
-    lcd->clear();
-    lcd->display(string);
+bool CarWash::isCarDetectState() {
+    return state == CAR_DETECT;
 }
 
-void CarWash::setCarInState()
-{
-    this->displayMessage("Proceed to the Washing Area");
-    // this->gate->setPosition
+void CarWash::setCarInState() {
+    this->gate->setPosition(GATE_OPEN);
+    state = CAR_IN;
+}
+
+bool CarWash::isCarInState() {
+    return state == CAR_IN;
 }
 
 void CarWash::setFullyEnteredState()

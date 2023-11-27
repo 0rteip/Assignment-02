@@ -19,22 +19,26 @@ public:
     CarWash();
     void init();
     bool getPrecence();
-    void switchL1();
-    void displayMessage(const char string[]);
-    void setCarInState();
+
+    void setCarDetectState();
+    bool isCarDetectState();
+
+    void setCarInState(); 
+    bool isCarInState();
+
     void setFullyEnteredState();
     void setWashingState();
     void setWashingCompletedState();
     void setCarOutState();
     bool isWashingStarted();
     void scrollDisplay();
-    void setCarDetectState();
     unsigned long getCarDistance();
 
 private:
     bool detect;
     bool stateL1;
     float washingAreaTemperture;
+    enum State {IDLE, CAR_DETECT, CAR_IN} state;
     Pir *pir;
     Led *leds[LED_NUM];
     DisplayLcdI2C *lcd;
