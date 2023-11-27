@@ -5,46 +5,54 @@
 #include "devices/Led.h"
 #include "devices/Pir.h"
 #include "devices/UltrasonicSensor.h"
-#include "devices/TempSensor.h"
-#include "devices/DisplayLcdI2C.h"
-#include "devices/servo_motor.h"
+#include "UserConsole.h"
+#include "devices/Gate.h"
 #include "config.h"
-
-#define GATE_CLOSE 0
-#define GATE_OPEN 180
 
 class CarWash
 {
 public:
-    CarWash();
+    CarWash(UserConsole *userConsole);
     void init();
-    bool getPrecence();
 
+    // set state
     void setCarDetectState();
-    bool isCarDetectState();
-
-    void setCarInState(); 
-    bool isCarInState();
-
     void setFullyEnteredState();
     void setWashingState();
     void setWashingCompletedState();
     void setCarOutState();
+    void setMaintenanceState();
+    void setCarInState();
+
+    // get state
+    bool isCarInState();
+    bool isCarDetectState();
     bool isWashingStarted();
-    void scrollDisplay();
+    bool isWashingComplete();
+    bool isMaintenanceComplete();
+
+    // get data
+    bool getPrecence();
     unsigned long getCarDistance();
+    void setWashingAreaTemperture(float temp);
 
 private:
+    enum State
+    {
+        IDLE,
+        CAR_DETECT,
+        CAR_IN
+    } state;
+
     bool detect;
     bool stateL1;
     float washingAreaTemperture;
-    enum State {IDLE, CAR_DETECT, CAR_IN} state;
+
+    UserConsole *userConsole;
     Pir *pir;
     Led *leds[LED_NUM];
-    DisplayLcdI2C *lcd;
-    ServoMotor *gate;
+    Gate *gate;
     UltrasonicSensor *prox;
-    TempSensor *tempSensor;
 };
 
 #endif
