@@ -23,7 +23,7 @@ void ControlTask::tick(){
         break;
     case CAR_DETECT:
         if (carWash->isCarInState()) {
-            userConsole->displayProced();
+            userConsole->displayProceed();
             setState(CAR_IN);
         }
         break;
