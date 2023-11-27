@@ -16,7 +16,7 @@
 #define PROX_ECHO_PIN 7
 #define PROX_TRIG_PIN 8
 
-#define TMP_PIN A0
+#define TEMP_PIN A0
 
 #define GATE_PIN 9
 
