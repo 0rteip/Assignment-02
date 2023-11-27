@@ -6,6 +6,8 @@
 #include <Arduino.h>
 #define MAX_DISTANCE_FROM_RIVER 3.00
 
+const char welcome[] = "Welcome";
+
 CarWash::CarWash(){
 }
 
@@ -32,17 +34,23 @@ void CarWash::switchL1() {
     }
 }
 
-void CarWash::displayMessage(char string[]) {
+void CarWash::displayMessage(const char string[]) {
     lcd->clear();
     lcd->display(string);
 }
 
+void CarWash::setCarDetectState() {
+    this->switchL1();
+    this->displayMessage(welcome);
+}
+
 void CarWash::setCarInState() {
     this->displayMessage("Proceed to the Washing Area");
-    //this->gate->setPosition
+    //this->gate->setPosition();
 }
 
 void CarWash::scrollDisplay()
 {
     this->lcd->scroll();
 }
+

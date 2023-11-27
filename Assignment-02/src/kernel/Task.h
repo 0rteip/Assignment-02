@@ -52,15 +52,13 @@ public:
   bool isActive(){
     return active;
   }
-
   virtual void setActive(bool active){
     timeElapsed = 0;
     this->active = active;
   }
-  
-private:
-
+protected: 
   int myPeriod;
+private:
   int timeElapsed;
   bool active;
   bool periodic;

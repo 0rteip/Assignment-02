@@ -15,9 +15,10 @@ public:
     void init();
     bool getPrecence();
     void switchL1();
-    void displayMessage(char string[]);
+    void displayMessage(const char string[]);
     void setCarInState();
     void scrollDisplay();
+    void setCarDetectState();
     
 private:
     bool detect;

@@ -3,9 +3,6 @@
 #include "config.h"
 #include "kernel/Logger.h"
 #include "tasks/BlinkLedTask.h"
-#define DELAY_BEFORE_OFF 1000
-
-const char welcome[] = "Welcome";
 
 DetectTask::DetectTask(CarWash* carWash, BlinkLedTask* blink):
     blink(blink),
@@ -18,15 +15,20 @@ void DetectTask::tick(){
     {
     case IDLE:
         if (carWash->getPrecence()) {
-            carWash->switchL1();
-            carWash->displayMessage(welcome);
+            carWash->setCarDetectState();
             state = DETECTED;
+
         }
+        /*if(elapsedTimeInState() > 5000) {
+            blink->setPeriod(500);
+            setState(CAR_IN);
+        }*/
+
+
         break;
     case DETECTED: 
         if (elapsedTimeInState() >= N1 ) {
             state = CAR_IN;
-            Serial.println("Attivo il blink");
             carWash->setCarInState();
             blink->setActive(true);
         }

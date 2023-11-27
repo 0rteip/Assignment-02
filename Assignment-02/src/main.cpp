@@ -12,27 +12,42 @@
 #include "model/CarWash.h"
 #include "tasks/DetectTask.h"
 #include "tasks/BlinkLedTask.h"
+#include "tasks/ControlTask.h"
+#include "devices/servo_motor.h"
+#include "devices/servo_motor_impl.h"
 
 Scheduler sched;
 CarWash* carWash;
-
+ServoMotor* motor;
 void setup() {
-    MsgService.init();
-    sched.init(50);
     Serial.begin(9600);
+
+    /*MsgService.init();
+    sched.init(50);
+    
     Logger.log(".:: Smart Bridge  ::."); 
     carWash = new CarWash();
     carWash->init();
 	Task* bilnkLedTask = new BlinkLedTask(LED1_PIN);
     bilnkLedTask->init(100);
-	bilnkLedTask->setActive(false);
+	//bilnkLedTask->setActive(false);
+    Task* controlTask = new ControlTask(BT_PIN, bilnkLedTask);
+    controlTask->init(100);
+	controlTask->setActive(false);
     Task* detectTask = new DetectTask(carWash, bilnkLedTask);
     detectTask->init(1000);
     sched.addTask(detectTask);
-	sched.addTask(bilnkLedTask);
+	sched.addTask(bilnkLedTask);*/
+    motor = new ServoMotorImpl(GATE_PIN);
+    motor->on();
+    motor->setPosition(0);
+    delay(1500);
+    motor->setPosition(90);
+
 }
 
 void loop() {
-    sched.schedule();
+   
+    //sched.schedule();
     //pUserConsole->test();
 }

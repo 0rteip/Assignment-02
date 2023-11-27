@@ -20,7 +20,8 @@ void ServoMotorImpl::setPosition(int angle){
   // 750 + angle*(2250-750)/180
   // updated values: min is 544, max 2400 (see ServoTimer2 doc)
   float coeff = (2400.0-544.0)/180;
-  motor.write(544 + angle*coeff);              
+  Serial.println(544 + angle*coeff);
+  motor.write(546 + angle*coeff);            
 }
 
 void ServoMotorImpl::off(){
