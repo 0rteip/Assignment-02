@@ -21,8 +21,7 @@ private:
     enum State
     {
         IDLE,
-        MEASURING,
-        WAITING_WASHING,
+        WAITING_ENTERING,
         WASHING,
         WAITING_LEAVING,
         LEAVING

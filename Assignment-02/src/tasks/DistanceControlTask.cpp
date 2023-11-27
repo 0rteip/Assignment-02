@@ -16,10 +16,10 @@ void DistanceControlTask::tick()
         if (this->carWash->getCarDistance() < MIN_DISTANCE)
         {
             Serial.println("Car in the washing area");
-            setState(MEASURING);
+            setState(WAITING_ENTERING);
         }
         break;
-    case MEASURING:
+    case WAITING_ENTERING:
         Serial.print("Car distance: ");
         Serial.println(this->carWash->getCarDistance());
 
@@ -32,23 +32,12 @@ void DistanceControlTask::tick()
         {
             this->blinkLedTask->setActive(false);
             this->carWash->setFullyEnteredState();
-            setState(WAITING_WASHING);
-        }
-        break;
-    case WAITING_WASHING:
-        if (this->carWash->isWashingStarted())
-        {
-            this->carWash->setWashingState();
             setState(WASHING);
         }
         break;
     case WASHING:
-        // Should this part be in the CarWash class?
-        // Because it's the CarWash that should know when the washing is completed.
-        // So, the CarWash should have a method like isWashingCompleted() that returns true when the washing is completed.
-        if (this->elapsedTimeInState() >= N3)
+        if (this->carWash->isWashingComplete())
         {
-            this->carWash->setWashingCompletedState();
             setState(WAITING_LEAVING);
         }
         break;
