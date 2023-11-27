@@ -11,13 +11,17 @@
 
 #define PIR_PIN 2
 
-#define SONAR_TRIG_PIN 7
-#define SONAR_ECHO_PIN 8
+#define PROX_PIN 7
+
+#define PROX_ECHO_PIN 7
+#define PROX_TRIG_PIN 8
+
+#define TMP_PIN A0
 
 #define GATE_PIN 9
 
-#define N1 1.00
-#define N2 2.00
-#define N3 3.00
-#define N4 3.00
+#define N1 2000
+#define N2 5000
+#define N3 6000
+#define N4 6000
 #endif

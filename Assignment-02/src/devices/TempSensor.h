@@ -1,13 +1,11 @@
 #ifndef __TEMP_SENSOR__
 #define __TEMP_SENSOR__
 
-class TempSensor {
+class TempSensor
+{
 
 public:
-  virtual float getTemperature() = 0;
-  
+  virtual float getCelsius() = 0;
 };
 
-
 #endif
-
