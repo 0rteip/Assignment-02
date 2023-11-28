@@ -13,16 +13,15 @@ class CarWash
 {
 public:
     CarWash(UserConsole *userConsole);
-    void init();
 
     // set state
+    void setCarInState();
     void setCarDetectState();
     void setFullyEnteredState();
     void setWashingState();
     void setWashingCompletedState();
     void setCarOutState();
     void setMaintenanceState();
-    void setCarInState();
 
     // get state
     bool isCarInState();

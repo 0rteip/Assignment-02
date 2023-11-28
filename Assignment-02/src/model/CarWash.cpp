@@ -10,10 +10,6 @@
 CarWash::CarWash(UserConsole *userConsole)
     : userConsole(userConsole)
 {
-}
-
-void CarWash::init()
-{
     pir = new Pir(PIR_PIN);
     leds[0] = new Led(LED1_PIN);
     leds[1] = new Led(LED2_PIN);
