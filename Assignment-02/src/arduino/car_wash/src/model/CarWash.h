@@ -41,9 +41,14 @@ public:
 private:
     enum State
     {
-        IDLE,
+        INACTIVE,
         CAR_DETECT,
-        CAR_IN
+        CAR_IN,
+        FULLY_ENTERED,
+        WASHING,
+        WASHING_COMPLETED,
+        CAR_OUT,
+        MAINTENANCE
     } state;
 
     bool detect;

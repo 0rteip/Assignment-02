@@ -16,7 +16,7 @@ CarWash::CarWash(UserConsole *userConsole)
     leds[2] = new Led(LED3_PIN);
     prox = new UltrasonicSensor(PROX_PIN);
     gate = new Gate(GATE_PIN);
-    state = IDLE;
+    state = INACTIVE;
 }
 
 bool CarWash::getPrecence()
@@ -58,13 +58,15 @@ void CarWash::setFullyEnteredState()
 
 void CarWash::setWashingState()
 {
+    this->state = WASHING;
     this->userConsole->displayWashing();
+
     Serial.println("Washing");
 }
 
 bool CarWash::isWashingStarted()
 {
-    return this->leds[1]->isOn();
+    return this->state == WASHING;
 }
 
 void CarWash::setWashingCompletedState()
@@ -74,12 +76,12 @@ void CarWash::setWashingCompletedState()
     this->userConsole->displayWashingCompleted();
     Serial.println("Washing completed, you can leave");
     this->gate->open();
+    this->state = WASHING_COMPLETED;
 }
 
 bool CarWash::isWashingComplete()
 {
-    delay(2000);
-    return true;
+    return this->state == WASHING_COMPLETED;
 }
 
 void CarWash::setCarOutState()
@@ -88,18 +90,19 @@ void CarWash::setCarOutState()
     this->userConsole->turnOffDisplay();
     Serial.println("Car out of the washing area");
     this->gate->close();
+    this->state = CAR_OUT;
 }
 
 void CarWash::setMaintenanceState()
 {
     this->userConsole->displayProblem();
     Serial.println("Maintenance started");
+    this->state = MAINTENANCE;
 }
 
 bool CarWash::isMaintenanceComplete()
 {
-    delay(2000);
-    return true;
+    return this->state == WASHING;
 }
 
 unsigned long CarWash::getCarDistance()
