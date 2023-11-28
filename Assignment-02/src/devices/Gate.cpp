@@ -12,6 +12,6 @@ void Gate::open()
 
 void Gate::close()
 {
-    this->on();
     this->setPosition(CLOSE_ANGLE);
+    this->off();
 }
