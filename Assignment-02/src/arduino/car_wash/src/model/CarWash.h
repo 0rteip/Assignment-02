@@ -36,6 +36,8 @@ public:
     unsigned long getCarDistance();
     void setWashingAreaTemperture(float temp);
 
+    String recState();
+
 private:
     enum State
     {

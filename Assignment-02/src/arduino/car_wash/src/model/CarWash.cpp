@@ -112,3 +112,19 @@ void CarWash::setWashingAreaTemperture(float temp)
     this->washingAreaTemperture = temp;
     this->prox->setTemperature(this->washingAreaTemperture);
 }
+
+String CarWash::recState()
+{
+    switch (state)
+    {
+    case IDLE:
+        return String("Nessuna macchina");
+    case CAR_DETECT:
+        return String("Macchina Individuata");
+    case CAR_IN:
+        return String("La macchina sta entrando");
+    default:
+        break;
+    }
+    return String();
+}
