@@ -14,6 +14,7 @@
 #include "tasks/BlinkLedTask.h"
 #include "tasks/ControlTask.h"
 #include "tasks/DistanceControlTask.h"
+#include "tasks/TemperatureControlTask.h"
 #include "kernel/TaskWithReinit.h"
 #include "UserConsole.h"
 
@@ -29,7 +30,7 @@ void setup()
 
     userConsole = new UserConsole();
     carWash = new CarWash(userConsole);
-
+    /*
     BlinkLedTask *blinkLedTask = new BlinkLedTask(LED2_PIN);
     blinkLedTask->init(100);
     blinkLedTask->setActive(false);
@@ -46,7 +47,10 @@ void setup()
     sched.addTask(blinkLedTask);
     sched.addTask(butTask);
     sched.addTask(detectTask);
-    sched.addTask(distanceControlTask);
+    sched.addTask(distanceControlTask);*/
+    Task *temp = new TemperatureControlTask(carWash, userConsole);
+    temp->init(5000);
+    sched.addTask(temp);
 }
 
 void loop()
