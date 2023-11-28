@@ -16,18 +16,15 @@ void ControlTask::tick(){
     switch (state)
     {
     case IDLE :
-        if (carWash->isCarDetectState()) {
+        if (carWash->isFullyEnteredState()) {
             userConsole->displayWelcome();
-            setState(CAR_DETECT);
+            setState(WAIT_PRESS);
         }
         break;
-    case CAR_DETECT:
-        if (carWash->isCarInState()) {
-            userConsole->displayProceed();
-            setState(CAR_IN);
+    case WAIT_PRESS:
+        if (userConsole->isButtonPressed()) {
+            carWash->setWashingState();
         }
-        break;
-    case CAR_IN :
         break;
     default:
         break;
