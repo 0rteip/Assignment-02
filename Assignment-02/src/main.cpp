@@ -20,30 +20,36 @@
 Scheduler sched;
 CarWash *carWash;
 UserConsole *userConsole;
+
 void setup()
 {
     // MsgService.init();
     Serial.begin(9600);
     sched.init(50);
-    userConsole = new UserConsole();
 
+    userConsole = new UserConsole();
     carWash = new CarWash(userConsole);
-    carWash->init();
-    Task *blinkLedTask = new BlinkLedTask(LED2_PIN);
+
+    BlinkLedTask *blinkLedTask = new BlinkLedTask(LED2_PIN);
     blinkLedTask->init(100);
     blinkLedTask->setActive(false);
+
     Task *butTask = new ControlTask(blinkLedTask, userConsole, carWash);
     butTask->init(200);
+
     Task *detectTask = new DetectTask(carWash, blinkLedTask);
     detectTask->init(1000);
-    sched.addTask(detectTask);
+
+    Task *distanceControlTask = new DistanceControlTask(carWash, blinkLedTask);
+    distanceControlTask->init(500);
+
     sched.addTask(blinkLedTask);
     sched.addTask(butTask);
+    sched.addTask(detectTask);
+    sched.addTask(distanceControlTask);
 }
 
 void loop()
 {
-
     sched.schedule();
-    // pUserConsole->test();
 }
