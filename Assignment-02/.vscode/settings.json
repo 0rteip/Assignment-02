@@ -3,5 +3,7 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "/home/luca/UNI/anno_3/IOT/esiot-2022/Java/module-lab-2.3/lib/jssc-2.9.4.jar"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
