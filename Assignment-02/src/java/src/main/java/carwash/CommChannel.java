@@ -1,4 +1,4 @@
-package carWash;
+package carwash;
 
 /**
  * Simple interface for an async msg communication channel

@@ -1,4 +1,4 @@
-package carWash;
+package carwash;
 
 import java.util.concurrent.*;
 import jssc.*;
