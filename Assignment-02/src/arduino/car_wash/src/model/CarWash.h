@@ -26,6 +26,7 @@ public:
     // get state
     bool isCarInState();
     bool isCarDetectState();
+    bool isFullyEnteredState();
     bool isWashingStarted();
     bool isWashingComplete();
     bool isMaintenanceComplete();

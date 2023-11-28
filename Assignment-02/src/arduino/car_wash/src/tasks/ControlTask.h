@@ -13,7 +13,7 @@ public:
     void tick();
     
 private:
-    enum  State {IDLE, CAR_IN, CAR_DETECT} state;
+    enum  State {IDLE, WAIT_PRESS} state;
 
     void setState(State state);
     long elapsedTimeInState();
