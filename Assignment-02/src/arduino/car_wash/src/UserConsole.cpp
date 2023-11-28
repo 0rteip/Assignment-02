@@ -71,3 +71,8 @@ void UserConsole::turnOnDisplay()
 void UserConsole::turnOffDisplay()
 {
 }
+
+void UserConsole::sendMessage(String state, float temp)
+{
+  MsgService.sendMsg("st:" + state + ":tp:" + String(temp));
+}

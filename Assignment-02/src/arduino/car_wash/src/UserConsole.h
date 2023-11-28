@@ -6,7 +6,8 @@
 #include "devices/DisplayLcdI2C.h"
 #include <Wire.h>
 
-class UserConsole {
+class UserConsole
+{
 
 public:
   UserConsole();
@@ -24,12 +25,13 @@ public:
   void displayWashingCompleted();
   void displayProblem();
 
+  void sendMessage(String state, float temp);
 
   bool isButtonPressed();
 
 private:
-  Button* button;
-  DisplayLcdI2C* lcd;
+  Button *button;
+  DisplayLcdI2C *lcd;
   bool needScrol;
 };
 
