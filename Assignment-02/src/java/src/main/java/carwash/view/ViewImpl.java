@@ -47,7 +47,7 @@ public final class ViewImpl implements View {
     @Override
     public void start(final Controller controller) {
         this.controller = controller;
-        logger.info("Starting a new game");
+        logger.info("Starting application");
         this.manager.openInitialMenu();
     }
 

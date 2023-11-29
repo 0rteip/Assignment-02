@@ -13,7 +13,7 @@ void DistanceControlTask::tick()
     {
     case IDLE:
         Serial.println("Waiting for a car to enter the washing area");
-        if (this->carWash->getCarDistance() < MIN_DISTANCE && this->carWash->isCarInState())
+        if (this->carWash->isCarInState() && this->carWash->getCarDistance() < MIN_DISTANCE)
         {
             Serial.println("Car in the washing area");
             setState(WAITING_ENTERING);

@@ -1,7 +1,5 @@
 package carwash.view.sceneloader;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.util.EnumMap;
@@ -28,6 +26,8 @@ import javafx.stage.Stage;
  * Implementation of {@link SceneLoader}.
  */
 public final class SceneLoaderImpl implements SceneLoader {
+
+    private static final String UPDATE_OBS = "update";
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -103,11 +103,9 @@ public final class SceneLoaderImpl implements SceneLoader {
         controller.setView(this.view);
         switch (sceneStyle) {
             case INITIALMENU:
-                // final SceneInitializer sceneInitController2 = (SceneInitializer) controller;
-                // sceneInitController2.initializeScene();
-                if (!this.pcs.hasListeners("update")) {
+                if (!this.pcs.hasListeners(UPDATE_OBS)) {
                     final MainSceneSetter sceneSetter = (MainSceneSetter) controller;
-                    this.pcs.addPropertyChangeListener("update", new CarWashObserver(sceneSetter));
+                    this.pcs.addPropertyChangeListener(UPDATE_OBS, new CarWashObserver(sceneSetter));
                 }
                 break;
             default:
@@ -123,6 +121,6 @@ public final class SceneLoaderImpl implements SceneLoader {
     @Override
     public void updateValue(final ValueType valueType, final String newValue) {
         logger.info("Update value {} with {}", valueType.getValue(), newValue);
-        this.pcs.firePropertyChange("update", valueType.getValue(), newValue);
+        this.pcs.firePropertyChange(UPDATE_OBS, valueType.getValue(), newValue);
     }
 }
