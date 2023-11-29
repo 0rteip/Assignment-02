@@ -1,4 +1,4 @@
-package carwash;
+package carwash.model.arduino;
 
 /**
  * Simple interface for an async msg communication channel

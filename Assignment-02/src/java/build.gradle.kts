@@ -32,8 +32,11 @@ val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
 dependencies {
     // Suppressions for SpotBugs
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.1")
-
+    
+    implementation("ch.qos.logback:logback-classic:1.4.13")
     implementation("io.github.java-native:jssc:2.9.5")
+    implementation("org.apache.commons:commons-lang3:3.6")
+
 
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
     // implementation("com.google.guava:guava:28.1-jre")
@@ -61,5 +64,5 @@ val main: String by project
 
 application {
     // Define the main class for the application
-    mainClass.set("carwash.App")
+    mainClass.set("carwash.Launcher")
 }

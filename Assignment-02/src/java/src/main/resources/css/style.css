@@ -1,0 +1,8 @@
+#topBox {
+    -fx-background-color: rgb(74, 71, 71);
+    background-color: rgb(74, 71, 71);
+}
+
+#topBox  Label {
+    -fx-text-fill: white;
+}
