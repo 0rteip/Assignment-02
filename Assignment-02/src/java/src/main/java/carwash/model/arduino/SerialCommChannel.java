@@ -15,7 +15,7 @@ public class SerialCommChannel implements CommChannel, SerialPortEventListener {
 	private BlockingQueue<String> queue;
 	private StringBuffer currentMsg = new StringBuffer("");
 	
-	public SerialCommChannel(String port, int rate) throws Exception {
+	public SerialCommChannel(String port, int rate) throws SerialPortException {
 		queue = new ArrayBlockingQueue<>(100);
 
 		serialPort = new SerialPort(port);

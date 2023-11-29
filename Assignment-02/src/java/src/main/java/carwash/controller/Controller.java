@@ -19,4 +19,21 @@ public interface Controller {
      * Quits from application.
      */
     void quit();
+
+     /**
+     * Update state value in view.
+     * @param state
+     */
+    void setState(String state);
+
+    /**
+     * Update temp value in view.
+     * 
+     * @param temp
+     */
+    void setTemp(String temp);
+    /**
+     * Send a message to arduino.
+     */
+    void fixTemp();
 }

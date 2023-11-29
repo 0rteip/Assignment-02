@@ -57,4 +57,9 @@ public interface View {
      *                  new value
      */
     void updateValue(ValueType valueType, String newValue);
+
+    /**
+     * Send fixed message.
+     */
+    void fixMessage();
 }

@@ -95,4 +95,9 @@ public final class ViewImpl implements View {
     public void updateValue(final ValueType valueType, final String newValue) {
         this.manager.updateValue(valueType, newValue);
     }
+
+    @Override
+    public void fixMessage() {
+        this.controller.fixTemp();
+    }
 }

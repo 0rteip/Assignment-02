@@ -19,14 +19,14 @@ public final class MainMenuController extends AbstractSceneController implements
     private TextField stateField;
 
     @FXML
-    private TextField temperatureField;
+    private TextField tempField;
 
     // could be used to notify for pressed button
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     @FXML
     public void fixTemperature() {
-        logger.info("fixTemperature pressed");
+        this.getView().fixMessage();
     }
 
     @Override
@@ -36,7 +36,7 @@ public final class MainMenuController extends AbstractSceneController implements
 
     @Override
     public void setTemperature(String text) {
-        this.temperatureField.setText(text);
+        this.tempField.setText(text);
     }
 
     // /**
