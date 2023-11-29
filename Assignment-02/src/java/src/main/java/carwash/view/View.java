@@ -2,6 +2,7 @@ package carwash.view;
 
 import carwash.controller.Controller;
 import carwash.model.message.Message;
+import carwash.model.valuetype.ValueType;
 import carwash.view.scenemanager.SceneManager;
 import carwash.view.settings.WindowSettings;
 
@@ -48,7 +49,12 @@ public interface View {
     void quit();
 
     /**
-     * Render View.
+     * Update value.
+     * 
+     * @param valueType
+     *                  value type
+     * @param newValue
+     *                  new value
      */
-    void render();
+    void updateValue(ValueType valueType, String newValue);
 }

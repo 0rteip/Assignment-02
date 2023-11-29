@@ -6,21 +6,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javafx.fxml.FXML;
-// import globaloutbreak.gamespeed.GameSpeedObserver;
-import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * Scene for settings.
  */
-public final class MainMenuController extends AbstractSceneController {
+public final class MainMenuController extends AbstractSceneController implements MainSceneSetter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @FXML
-    private Button saveButton;
+    private TextField stateField;
 
     @FXML
-    private Button cancelButton;
+    private TextField temperatureField;
 
     // could be used to notify for pressed button
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -28,6 +27,16 @@ public final class MainMenuController extends AbstractSceneController {
     @FXML
     public void fixTemperature() {
         logger.info("fixTemperature pressed");
+    }
+
+    @Override
+    public void setStatus(String text) {
+        this.stateField.setText(text);
+    }
+
+    @Override
+    public void setTemperature(String text) {
+        this.temperatureField.setText(text);
     }
 
     // /**

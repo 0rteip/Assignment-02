@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import carwash.controller.Controller;
 import carwash.model.message.Message;
+import carwash.model.valuetype.ValueType;
 import carwash.view.scenemanager.SceneManager;
 import carwash.view.scenemanager.SceneManagerImpl;
 import carwash.view.settings.WindowSettings;
@@ -91,7 +92,7 @@ public final class ViewImpl implements View {
     }
 
     @Override
-    public void render() {
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+    public void updateValue(final ValueType valueType, final String newValue) {
+        this.manager.updateValue(valueType, newValue);
     }
 }
