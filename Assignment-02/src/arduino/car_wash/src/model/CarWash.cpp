@@ -158,9 +158,9 @@ String CarWash::recState()
     return String();
 }
 
-void CarWash::displayTime(unsigned long time) 
+void CarWash::displayProgress(int progress) 
 {
-    this->userConsole->displayTime(time);
+    this->userConsole->displayProgress(progress);
 }
 
 void CarWash::scroll() 

@@ -29,7 +29,7 @@ public:
   bool problemIsfixed();
   bool isButtonPressed();
 
-  void displayTime(unsigned long time);
+  void displayProgress(int progress);
   void scroll();
 
 private:

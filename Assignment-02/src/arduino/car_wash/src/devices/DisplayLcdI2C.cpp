@@ -84,4 +84,5 @@ void DisplayLcdI2C::updateProgressBar(unsigned long progress, unsigned long tota
             Serial.print("0");
         }
     }
+    Serial.println();
 }

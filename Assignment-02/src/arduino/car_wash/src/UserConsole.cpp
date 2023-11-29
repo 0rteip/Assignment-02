@@ -79,14 +79,17 @@ void UserConsole::sendMessage(String state, float temp)
   MsgService.sendMsg("st:" + state + ":tp:" + String(temp));
 }
 
-void UserConsole::displayTime(unsigned long time) {
-    this->lcd->display(String(time));
+void UserConsole::displayProgress(int progress)
+{
+  this->lcd->updateProgress(progress);
 }
 
-void UserConsole::scroll() {
-    if(needScrol) {
-        this->lcd->scroll();
-    }
+void UserConsole::scroll()
+{
+  if (needScrol)
+  {
+    this->lcd->scroll();
+  }
 }
 
 bool UserConsole::problemIsfixed()
