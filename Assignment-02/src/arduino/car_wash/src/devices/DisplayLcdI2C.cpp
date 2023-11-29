@@ -64,52 +64,24 @@ void DisplayLcdI2C::updateProgressBar(unsigned long progress, unsigned long tota
     int percent = (progress + 1) / factor;
     int number = percent / 5;
     int remainder = percent % 5;
-
     if (number > 0)
     {
-        // stampo il primo totalmente pieno (p1)
-        Serial.print("[f");
-
-        // stampo i successivi che sono pieni (p2)
-        for (int j = 1; j < number; j++)
+        for (int j = 0; j < number; j++)
         {
             this->lcd->setCursor(j, lineToPrintOn);
             this->lcd->write(5);
-            Serial.print(5);
-        }
-        // Stampo rimanente, 
-        if (remainder != 0)
-        {
-            Serial.print(remainder);
-            number++;
+            Serial.print("5");
         }
     }
-    else
-    {
-        Serial.print("[");
-        Serial.print(remainder);
-        number++;
-    }
-
     this->lcd->setCursor(number, lineToPrintOn);
     this->lcd->write(remainder);
-
-    // Serial.print(" ");
-    // Serial.print(number);
-    // Serial.print(" ");
-
-    // int tmpNumber = number;
-
-    // Stampo spazi vuoti
-    if (number < 16)
+    if (number < 16) // If using a 20 character display, this should be 20!
     {
-        for (int j = number + 1; j <= 16; j++)
+        for (int j = number + 1; j <= 16; j++) // If using a 20 character display, this should be 20!
         {
             this->lcd->setCursor(j, lineToPrintOn);
             this->lcd->write(0);
-            Serial.print(0);
+            Serial.print("0");
         }
     }
-
-    Serial.println("]");
 }
