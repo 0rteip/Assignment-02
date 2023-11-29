@@ -30,13 +30,12 @@ void setup()
 
     userConsole = new UserConsole();
     carWash = new CarWash(userConsole);
-    /*
     BlinkLedTask *blinkLedTask = new BlinkLedTask(LED2_PIN);
     blinkLedTask->init(100);
     blinkLedTask->setActive(false);
 
     Task *butTask = new ControlTask(blinkLedTask, userConsole, carWash);
-    butTask->init(200);
+    butTask->init(150);
 
     Task *detectTask = new DetectTask(carWash, blinkLedTask);
     detectTask->init(1000);
@@ -47,9 +46,9 @@ void setup()
     sched.addTask(blinkLedTask);
     sched.addTask(butTask);
     sched.addTask(detectTask);
-    sched.addTask(distanceControlTask);*/
+    sched.addTask(distanceControlTask);
     Task *temp = new TemperatureControlTask(carWash, userConsole);
-    temp->init(5000);
+    temp->init(200);
     sched.addTask(temp);
 }
 
