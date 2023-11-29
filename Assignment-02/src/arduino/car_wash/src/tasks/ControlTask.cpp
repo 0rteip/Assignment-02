@@ -13,17 +13,18 @@ ControlTask::ControlTask(BlinkLedTask* blink, UserConsole* userConsole, CarWash*
 }
 
 void ControlTask::tick(){
+    userConsole->sync();
     switch (state)
     {
     case IDLE :
         if (carWash->isFullyEnteredState()) {
-            userConsole->displayWelcome();
             setState(WAIT_PRESS);
         }
         break;
     case WAIT_PRESS:
         if (userConsole->isButtonPressed()) {
             carWash->setWashingState();
+            setState(IDLE);
         }
         break;
     default:
