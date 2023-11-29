@@ -22,12 +22,14 @@ CarWash::CarWash(UserConsole *userConsole)
     state = INACTIVE;
 }
 
-void CarWash::off() {
+void CarWash::off()
+{
     this->userConsole->turnOffDisplay();
     this->userConsole->sendMessage("Sleep", 0.0);
 }
 
-void CarWash::on() {
+void CarWash::on()
+{
     userConsole->turnOnDisplay();
 }
 bool CarWash::getPrecence()
@@ -137,12 +139,20 @@ String CarWash::recState()
 {
     switch (state)
     {
-    case WASHING:
-        return String("Nessuna macchina");
     case CAR_DETECT:
         return String("Macchina Individuata");
     case CAR_IN:
         return String("La macchina sta entrando");
+    case FULLY_ENTERED:
+        return String("La macchina è entrata");
+    case WASHING:
+        return String("Lavaggio");
+    case WASHING_COMPLETED:
+        return String("Lavaggio completato");
+    case CAR_OUT:
+        return String("Macchina uscita");
+    case MAINTENANCE:
+        return String("Manutenzione");
     default:
         break;
     }
