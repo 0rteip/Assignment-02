@@ -14,27 +14,19 @@ DetectTask::DetectTask(CarWash* carWash, BlinkLedTask* blink):
 }
 
 void DetectTask::tick(){
+    this->carWash->scroll();
     switch (state)
     {
     case IDLE:
-        Serial.println("GOING IN POWER DOWN IN 1s ...");
-        
         this->carWash->off();
         Serial.flush();
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
         sleep_enable();
         sleep_mode();
-        /** The program will continue from here. **/
-        Serial.println("WAKE UP");
-        /* First thing to do is disable sleep. */
         sleep_disable();
         this->carWash->on();
         carWash->setCarDetectState();
         setState(DETECTED);
-        /* if (carWash->getPrecence()) {
-            carWash->setCarDetectState();
-            setState(DETECTED);
-        } */
         break;
     case DETECTED: 
         if (elapsedTimeInState() >= N1 ) {

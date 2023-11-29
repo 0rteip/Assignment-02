@@ -23,7 +23,7 @@ void DisplayLcdI2C::clear()
 
 void DisplayLcdI2C::scroll()
 {
-    this->lcd->scrollDisplayRight();
+    this->lcd->scrollDisplayLeft();
 }
 
 void DisplayLcdI2C::off()

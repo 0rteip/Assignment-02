@@ -30,6 +30,7 @@ public:
   bool isButtonPressed();
 
   void displayTime(unsigned long time);
+  void scroll();
 
 private:
   Button *button;

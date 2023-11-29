@@ -37,6 +37,7 @@ public:
     void on();
     
     void displayTime(unsigned long time);
+    void scroll();
     // get data
     bool getPrecence();
     unsigned long getCarDistance();

@@ -82,6 +82,13 @@ void UserConsole::sendMessage(String state, float temp)
 void UserConsole::displayTime(unsigned long time) {
     this->lcd->display(String(time));
 }
+
+void UserConsole::scroll() {
+    if(needScrol) {
+        this->lcd->scroll();
+    }
+}
+
 bool UserConsole::problemIsfixed()
 {
   if (MsgService.isMsgAvailable())

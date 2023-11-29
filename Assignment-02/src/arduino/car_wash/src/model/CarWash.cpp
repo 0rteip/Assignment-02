@@ -163,6 +163,11 @@ void CarWash::displayTime(unsigned long time)
     this->userConsole->displayTime(time);
 }
 
+void CarWash::scroll() 
+{
+    this->userConsole->scroll();
+}
+
 bool CarWash::isCarOutState() 
 {
     return state == CAR_OUT;
