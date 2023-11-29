@@ -1,4 +1,4 @@
-package carwash;
+package carwash.model.arduino;
 
 public class App {
     public static void main(String[] args) throws Exception {

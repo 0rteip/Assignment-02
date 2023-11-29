@@ -1,4 +1,4 @@
-package carwash;
+package carwash.model.arduino;
 
 import java.util.concurrent.*;
 import jssc.*;
