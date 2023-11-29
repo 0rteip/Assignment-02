@@ -12,10 +12,8 @@ void DistanceControlTask::tick()
     switch (this->state)
     {
     case IDLE:
-        Serial.println("Waiting for a car to enter the washing area");
         if (this->carWash->isCarInState() && this->carWash->getCarDistance() < MIN_DISTANCE)
         {
-            Serial.println("Car in the washing area");
             setState(WAITING_ENTERING);
         }
         break;
@@ -25,7 +23,6 @@ void DistanceControlTask::tick()
 
         if (this->carWash->getCarDistance() > MIN_DISTANCE)
         {
-            Serial.println("Car out of the washing area");
             setState(IDLE);
         }
         else if (this->elapsedTimeInState() >= N2)
@@ -34,17 +31,20 @@ void DistanceControlTask::tick()
             this->carWash->setFullyEnteredState();
             setState(WASHING);
         }
-        
+        break;
+    case WAITING_STARTING:
+        if (this->carWash->isWashingStarted())
+        {
+            setState(WASHING);
+        }
         break;
     case WASHING:
-        if (this->carWash->isWashingStarted()) {
-            this->carWash->displayTime(elapsedTimeInState());
-            if (this->elapsedTimeInState() >= N4)
-            {
-                setState(WAITING_LEAVING);
-            }
+        this->carWash->displayTime(elapsedTimeInState());
+        if (this->elapsedTimeInState() >= N4)
+        {
+            setState(WAITING_LEAVING);
         }
-            break;
+        break;
     case WAITING_LEAVING:
         if (this->carWash->getCarDistance() > MAX_DISTANCE)
         {
