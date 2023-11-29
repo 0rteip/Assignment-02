@@ -36,7 +36,7 @@ void DistanceControlTask::tick()
         }
         break;
     case WASHING:
-        if (this->carWash->isWashingComplete())
+        if (this->carWash->isWashingComplete() && this->elapsedTimeInState() >= N4)
         {
             setState(WAITING_LEAVING);
         }
