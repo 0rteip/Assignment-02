@@ -7,10 +7,13 @@
 #include "CarWash.h"
 #include <Arduino.h>
 
+void wakeUp() {}
+
 CarWash::CarWash(UserConsole *userConsole)
     : userConsole(userConsole)
 {
     pir = new Pir(PIR_PIN);
+    attachInterrupt(digitalPinToInterrupt(2), wakeUp, RISING);
     leds[0] = new Led(LED1_PIN);
     leds[1] = new Led(LED2_PIN);
     leds[2] = new Led(LED3_PIN);
@@ -19,6 +22,14 @@ CarWash::CarWash(UserConsole *userConsole)
     state = INACTIVE;
 }
 
+void CarWash::off() {
+    this->userConsole->turnOffDisplay();
+    this->userConsole->sendMessage("Sleep", 0.0);
+}
+
+void CarWash::on() {
+    userConsole->turnOnDisplay();
+}
 bool CarWash::getPrecence()
 {
     this->pir->sync();
@@ -37,6 +48,11 @@ bool CarWash::isCarDetectState()
     return state == CAR_DETECT;
 }
 
+bool CarWash::isFullyEnteredState()
+{
+    return state == FULLY_ENTERED;
+}
+
 void CarWash::setCarInState()
 {
     this->gate->open();
@@ -53,6 +69,8 @@ void CarWash::setFullyEnteredState()
 {
     this->leds[1]->switchOn();
     this->gate->close();
+    this->userConsole->displayReadyToWash();
+    state = FULLY_ENTERED;
     Serial.println("Car fully entered, ready to wash");
 }
 
@@ -60,7 +78,6 @@ void CarWash::setWashingState()
 {
     this->state = WASHING;
     this->userConsole->displayWashing();
-
     Serial.println("Washing");
 }
 
@@ -120,7 +137,7 @@ String CarWash::recState()
 {
     switch (state)
     {
-    case IDLE:
+    case WASHING:
         return String("Nessuna macchina");
     case CAR_DETECT:
         return String("Macchina Individuata");

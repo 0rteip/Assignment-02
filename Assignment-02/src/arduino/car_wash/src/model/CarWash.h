@@ -31,11 +31,14 @@ public:
     bool isWashingComplete();
     bool isMaintenanceComplete();
 
+    //sleep
+    void off();
+    void on();
+    
     // get data
     bool getPrecence();
     unsigned long getCarDistance();
     void setWashingAreaTemperture(float temp);
-
     String recState();
 
 private:
