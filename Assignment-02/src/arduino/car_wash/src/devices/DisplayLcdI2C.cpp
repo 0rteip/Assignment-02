@@ -25,3 +25,13 @@ void DisplayLcdI2C::scroll()
 {
     this->lcd->scrollDisplayRight();
 }
+
+void DisplayLcdI2C::off()
+{
+    this->lcd->noBacklight();
+}
+
+void DisplayLcdI2C::on()
+{
+    this->lcd->backlight();
+}

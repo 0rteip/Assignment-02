@@ -7,6 +7,8 @@ public:
     void display(const char string[]);
     void clear();
     void scroll();
+    void off();
+    void on();
 private: 
     LiquidCrystal_I2C* lcd;
 };
