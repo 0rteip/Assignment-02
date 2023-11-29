@@ -6,9 +6,9 @@
 #include "tasks/BlinkLedTask.h"
 
 // A distance of 100 cm is the distance to consider a car is in the washing area
-#define MIN_DISTANCE 100
+#define MIN_DISTANCE 8
 // A distance of 500 cm is the distance to consider a car is out the washing area
-#define MAX_DISTANCE 500
+#define MAX_DISTANCE 20
 
 class DistanceControlTask : public Task
 {
