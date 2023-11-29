@@ -30,11 +30,13 @@ public:
     bool isWashingStarted();
     bool isWashingComplete();
     bool isMaintenanceComplete();
+    bool isCarOutState();
 
     //sleep
     void off();
     void on();
     
+    void displayTime(unsigned long time);
     // get data
     bool getPrecence();
     unsigned long getCarDistance();

@@ -10,7 +10,7 @@ DisplayLcdI2C::DisplayLcdI2C()
     this->lcd->leftToRight();
 }
 
-void DisplayLcdI2C::display(const char string[])
+void DisplayLcdI2C::display(String string)
 {
     this->clear();
     lcd->print(string);

@@ -26,7 +26,7 @@ TemperatureControlTask::TemperatureControlTask(CarWash *carWash, UserConsole *us
 void TemperatureControlTask::tick()
 {
     this->checkTemp();
-    this->userConsole->sendMessage(carWash->recState(), temp);
+    //this->userConsole->sendMessage(carWash->recState(), temp);
     switch (this->state)
     {
     case IDLE:

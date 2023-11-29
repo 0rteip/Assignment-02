@@ -4,7 +4,7 @@
 class DisplayLcdI2C { 
 public:
     DisplayLcdI2C();
-    void display(const char string[]);
+    void display(String string);
     void clear();
     void scroll();
     void off();

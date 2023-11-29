@@ -29,6 +29,8 @@ public:
   bool problemIsfixed();
   bool isButtonPressed();
 
+  void displayTime(unsigned long time);
+
 private:
   Button *button;
   DisplayLcdI2C *lcd;

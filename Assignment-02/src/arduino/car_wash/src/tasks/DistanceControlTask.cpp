@@ -34,17 +34,22 @@ void DistanceControlTask::tick()
             this->carWash->setFullyEnteredState();
             setState(WASHING);
         }
+        
         break;
     case WASHING:
-        if (this->carWash->isWashingComplete() && this->elapsedTimeInState() >= N4)
-        {
-            setState(WAITING_LEAVING);
+        if (this->carWash->isWashingStarted()) {
+            this->carWash->displayTime(elapsedTimeInState());
+            if (this->elapsedTimeInState() >= N4)
+            {
+                setState(WAITING_LEAVING);
+            }
         }
-        break;
+            break;
     case WAITING_LEAVING:
         if (this->carWash->getCarDistance() > MAX_DISTANCE)
         {
             Serial.println("Car leaving the washing area");
+            this->carWash->setWashingCompletedState();
             setState(LEAVING);
         }
         break;

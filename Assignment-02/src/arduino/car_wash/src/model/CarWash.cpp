@@ -79,7 +79,6 @@ void CarWash::setFullyEnteredState()
 void CarWash::setWashingState()
 {
     this->state = WASHING;
-    this->userConsole->displayWashing();
     Serial.println("Washing");
 }
 
@@ -157,4 +156,14 @@ String CarWash::recState()
         break;
     }
     return String();
+}
+
+void CarWash::displayTime(unsigned long time) 
+{
+    this->userConsole->displayTime(time);
+}
+
+bool CarWash::isCarOutState() 
+{
+    return state == CAR_OUT;
 }

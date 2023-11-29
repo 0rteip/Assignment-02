@@ -23,7 +23,7 @@ void ControlTask::tick(){
         break;
     case WAIT_PRESS:
         if (userConsole->isButtonPressed()) {
-            carWash->setWashingState();
+            carWash->setWashingState();  
             setState(IDLE);
         }
         break;

@@ -79,6 +79,9 @@ void UserConsole::sendMessage(String state, float temp)
   MsgService.sendMsg("st:" + state + ":tp:" + String(temp));
 }
 
+void UserConsole::displayTime(unsigned long time) {
+    this->lcd->display(String(time));
+}
 bool UserConsole::problemIsfixed()
 {
   if (MsgService.isMsgAvailable())

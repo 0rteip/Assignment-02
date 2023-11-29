@@ -18,21 +18,23 @@ void DetectTask::tick(){
     {
     case IDLE:
         Serial.println("GOING IN POWER DOWN IN 1s ...");
+        
         this->carWash->off();
         Serial.flush();
-        delay(1000);
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
         sleep_enable();
         sleep_mode();
-        this->carWash->on();
         /** The program will continue from here. **/
         Serial.println("WAKE UP");
         /* First thing to do is disable sleep. */
         sleep_disable();
-        if (carWash->getPrecence()) {
+        this->carWash->on();
+        carWash->setCarDetectState();
+        setState(DETECTED);
+        /* if (carWash->getPrecence()) {
             carWash->setCarDetectState();
             setState(DETECTED);
-        }
+        } */
         break;
     case DETECTED: 
         if (elapsedTimeInState() >= N1 ) {
@@ -42,6 +44,9 @@ void DetectTask::tick(){
         }
         break;
     case CAR_IN:
+        if (this->carWash->isCarOutState()) {
+            setState(IDLE);
+        }
         break;
     default:
         break;
