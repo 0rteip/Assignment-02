@@ -22,6 +22,7 @@ private:
     {
         IDLE,
         WAITING_ENTERING,
+        WAITING_STARTING,
         WASHING,
         WAITING_LEAVING,
         LEAVING
