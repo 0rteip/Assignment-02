@@ -9,9 +9,9 @@
 
 UserConsole::UserConsole()
 {
-  lcd = new DisplayLcdI2C();
-  button = new ButtonImpl(BT_PIN);
-  needScrol = false;
+  this->lcd = new DisplayLcdI2C();
+  this->button = new ButtonImpl(BT_PIN);
+  this->needScrol = false;
 }
 
 void UserConsole::init()
@@ -20,7 +20,7 @@ void UserConsole::init()
 
 void UserConsole::sync()
 {
-  button->sync();
+  this->button->sync();
 }
 
 bool UserConsole::isButtonPressed()
@@ -30,49 +30,64 @@ bool UserConsole::isButtonPressed()
 
 void UserConsole::displayWelcome()
 {
-  lcd->display("Welcome");
-  needScrol = false;
+  this->lcd->display("Welcome");
+  this->needScrol = false;
 }
 
 void UserConsole::displayProceed()
 {
-  lcd->display("Proceed to the Washing Area");
-  needScrol = true;
+  this->lcd->display("Proceed to the Washing Area");
+  this->needScrol = true;
 }
 
 void UserConsole::displayReadyToWash()
 {
-  lcd->display("Ready to Wash");
-  needScrol = false;
+  this->lcd->display("Ready to Wash");
+  this->needScrol = false;
 }
 
 void UserConsole::displayWashing()
 {
-  lcd->display("Washing");
-  needScrol = false;
+  this->lcd->display("Washing");
+  this->needScrol = false;
 }
 
 void UserConsole::displayWashingCompleted()
 {
-  lcd->display("Washing complete, you can leave the area");
-  needScrol = false;
+  this->lcd->display("Washing complete, you can leave the area");
+  this->needScrol = false;
 }
 
 void UserConsole::displayProblem()
 {
-  lcd->display("Detected a Problem - Please Wait");
-  needScrol = false;
+  this->lcd->display("Detected a Problem - Please Wait");
+  this->needScrol = false;
 }
 
 void UserConsole::turnOnDisplay()
 {
+  this->lcd->on();
 }
 
 void UserConsole::turnOffDisplay()
 {
+  this->lcd->off();
 }
 
 void UserConsole::sendMessage(String state, float temp)
 {
   MsgService.sendMsg("st:" + state + ":tp:" + String(temp));
+}
+
+bool UserConsole::problemIsfixed()
+{
+  if (MsgService.isMsgAvailable())
+  {
+    Msg *msg = MsgService.receiveMsg();
+    if (msg->getContent().equals("Fixed"))
+    {
+      return true;
+    }
+  }
+  return false;
 }

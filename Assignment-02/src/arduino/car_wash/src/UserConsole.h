@@ -26,7 +26,7 @@ public:
   void displayProblem();
 
   void sendMessage(String state, float temp);
-
+  bool problemIsfixed();
   bool isButtonPressed();
 
 private:
