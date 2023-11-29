@@ -118,6 +118,11 @@ void CarWash::setMaintenanceState()
     this->state = MAINTENANCE;
 }
 
+bool CarWash::isMaintenanceNeeded()
+{
+    return this->state == MAINTENANCE;
+}
+
 bool CarWash::isMaintenanceComplete()
 {
     return this->state == WASHING;

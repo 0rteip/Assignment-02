@@ -29,6 +29,7 @@ public:
     bool isFullyEnteredState();
     bool isWashingStarted();
     bool isWashingComplete();
+    bool isMaintenanceNeeded();
     bool isMaintenanceComplete();
     bool isCarOutState();
 
