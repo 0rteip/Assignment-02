@@ -47,8 +47,9 @@ void TemperatureControlTask::tick()
         }
         break;
     case FIXING:
-        if (this->carWash->isMaintenanceComplete())
+        if (this->userConsole->problemIsfixed())
         {
+            this->carWash->setWashingState();
             Serial.println("Maintenance ended");
             setState(IDLE);
         }
