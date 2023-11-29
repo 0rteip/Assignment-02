@@ -1,5 +1,7 @@
 package carwash.view.sceneloader;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.util.EnumMap;
@@ -9,9 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import carwash.model.message.Message;
+import carwash.model.valuetype.ValueType;
 import carwash.view.View;
 import carwash.view.message.MessageDialog;
+import carwash.view.scenecontroller.MainSceneSetter;
 import carwash.view.scenecontroller.SceneController;
+import carwash.view.scenecontroller.observer.CarWashObserver;
 import carwash.view.utilities.SceneStyle;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.scene.layout.Region;
@@ -98,8 +103,12 @@ public final class SceneLoaderImpl implements SceneLoader {
         controller.setView(this.view);
         switch (sceneStyle) {
             case INITIALMENU:
-                // final SceneInitializer sceneInitController = (SceneInitializer) controller;
-                // sceneInitController.initializeScene();
+                // final SceneInitializer sceneInitController2 = (SceneInitializer) controller;
+                // sceneInitController2.initializeScene();
+                if (!this.pcs.hasListeners("update")) {
+                    final MainSceneSetter sceneSetter = (MainSceneSetter) controller;
+                    this.pcs.addPropertyChangeListener("update", new CarWashObserver(sceneSetter));
+                }
                 break;
             default:
                 break;
@@ -109,5 +118,11 @@ public final class SceneLoaderImpl implements SceneLoader {
     @Override
     public void openDialog(final Stage stage, final Message message, final CountDownLatch latch) {
         MessageDialog.showMessageDialog(stage, message, latch);
+    }
+
+    @Override
+    public void updateValue(final ValueType valueType, final String newValue) {
+        logger.info("Update value {} with {}", valueType.getValue(), newValue);
+        this.pcs.firePropertyChange(valueType.getValue(), null, newValue);
     }
 }

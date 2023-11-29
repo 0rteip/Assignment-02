@@ -4,6 +4,7 @@ import java.util.concurrent.CountDownLatch;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import carwash.model.message.Message;
+import carwash.model.valuetype.ValueType;
 import carwash.view.utilities.SceneStyle;
 import carwash.view.View;
 import carwash.view.sceneloader.SceneLoader;
@@ -48,5 +49,10 @@ public final class SceneManagerImpl implements SceneManager {
     @Override
     public void openMessage(final Message message, final CountDownLatch latch) {
         this.sceneLoader.openDialog(this.stage, message, latch);
+    }
+
+    @Override
+    public void updateValue(final ValueType valueType, final String newValue) {
+        this.sceneLoader.updateValue(valueType, newValue);
     }
 }
