@@ -29,7 +29,7 @@ void DistanceControlTask::tick()
         {
             this->blinkLedTask->setActive(false);
             this->carWash->setFullyEnteredState();
-            setState(WASHING);
+            setState(WAITING_STARTING);
         }
         break;
     case WAITING_STARTING:

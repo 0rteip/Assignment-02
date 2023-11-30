@@ -20,7 +20,7 @@
 
 #define GATE_PIN 9
 
-#define N1 10000
+#define N1 5000
 #define N2 5000
 #define N3 6000
 #define N4 6000
