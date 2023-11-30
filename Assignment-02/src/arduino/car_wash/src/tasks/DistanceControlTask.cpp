@@ -35,14 +35,27 @@ void DistanceControlTask::tick()
     case WAITING_STARTING:
         if (this->carWash->isWashingStarted())
         {
+            this->remainingTime = N3;
             setState(WASHING);
         }
         break;
     case WASHING:
-        this->carWash->displayTime(elapsedTimeInState());
-        if (this->elapsedTimeInState() >= N4)
+        this->carWash->displayProgress(map(this->elapsedTimeInState(), 0, N3 + 1, 0, 100));
+        this->remainingTime -= this->elapsedTimeInState();
+
+        if (this->carWash->isMaintenanceNeeded())
+        {
+            setState(MAINTENANCE);
+        }
+        else if (this->remainingTime <= 0)
         {
             setState(WAITING_LEAVING);
+        }
+        break;
+    case MAINTENANCE:
+        if (this->carWash->isMaintenanceComplete())
+        {
+            setState(WASHING);
         }
         break;
     case WAITING_LEAVING:

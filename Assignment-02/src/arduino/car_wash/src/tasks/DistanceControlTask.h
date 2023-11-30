@@ -24,6 +24,7 @@ private:
         WAITING_ENTERING,
         WAITING_STARTING,
         WASHING,
+        MAINTENANCE,
         WAITING_LEAVING,
         LEAVING
     } state;
@@ -31,7 +32,7 @@ private:
     void setState(State state);
     long elapsedTimeInState();
 
-    float distance;
+    int remainingTime;
     long stateTimestamp;
     CarWash *carWash;
     BlinkLedTask *blinkLedTask;

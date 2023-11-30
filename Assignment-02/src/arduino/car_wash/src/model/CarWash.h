@@ -29,14 +29,15 @@ public:
     bool isFullyEnteredState();
     bool isWashingStarted();
     bool isWashingComplete();
+    bool isMaintenanceNeeded();
     bool isMaintenanceComplete();
     bool isCarOutState();
 
-    //sleep
+    // sleep
     void off();
     void on();
-    
-    void displayTime(unsigned long time);
+
+    void displayProgress(int progress);
     void scroll();
     // get data
     bool getPrecence();
