@@ -19,7 +19,6 @@ DisplayLcdI2C::DisplayLcdI2C()
 
 void DisplayLcdI2C::display(String string)
 {
-    Serial.println(string);
     this->clear();
     lcd->print(string);
 }
@@ -30,10 +29,6 @@ void DisplayLcdI2C::updateProgress(int progress)
     this->lcd->print("Progress: ");
     this->lcd->print(progress);
     this->lcd->print("%");
-
-    Serial.print("Progress: ");
-    Serial.print(progress);
-    Serial.println("%");
 
     this->updateProgressBar(progress, 100, 1);
 }
@@ -70,7 +65,6 @@ void DisplayLcdI2C::updateProgressBar(unsigned long progress, unsigned long tota
         {
             this->lcd->setCursor(j, lineToPrintOn);
             this->lcd->write(5);
-            Serial.print("5");
         }
     }
     this->lcd->setCursor(number, lineToPrintOn);
@@ -81,8 +75,6 @@ void DisplayLcdI2C::updateProgressBar(unsigned long progress, unsigned long tota
         {
             this->lcd->setCursor(j, lineToPrintOn);
             this->lcd->write(0);
-            Serial.print("0");
         }
     }
-    Serial.println();
 }
