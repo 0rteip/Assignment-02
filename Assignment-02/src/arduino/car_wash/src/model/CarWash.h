@@ -39,11 +39,12 @@ public:
 
     void displayProgress(int progress);
     void scroll();
+
     // get data
     bool getPrecence();
     unsigned long getCarDistance();
     void setWashingAreaTemperture(float temp);
-    String recState();
+    String getStateDescription();
 
 private:
     enum State

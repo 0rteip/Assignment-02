@@ -3,17 +3,19 @@
 #include "config.h"
 #include "kernel/Logger.h"
 #include "tasks/BlinkLedTask.h"
+#include "tasks/DistanceControlTask.h"
 #include <avr/sleep.h>
 
-DetectTask::DetectTask(CarWash* carWash, BlinkLedTask* blink):
-    carWash(carWash), blink(blink)
-     {
-        this->carWash = carWash;
-        this->blink = blink;
-        setState(IDLE); 
+DetectTask::DetectTask(CarWash *carWash, DistanceControlTask *distanceControlTask, BlinkLedTask *blink)
+    : carWash(carWash), distanceControlTask(distanceControlTask), blink(blink)
+{
+    this->carWash = carWash;
+    this->blink = blink;
+    setState(IDLE);
 }
 
-void DetectTask::tick(){
+void DetectTask::tick()
+{
     this->carWash->scroll();
     switch (state)
     {
@@ -25,18 +27,21 @@ void DetectTask::tick(){
         sleep_mode();
         sleep_disable();
         this->carWash->on();
-        carWash->setCarDetectState();
+        this->carWash->setCarDetectState();
         setState(DETECTED);
         break;
-    case DETECTED: 
-        if (elapsedTimeInState() >= N1 ) {
+    case DETECTED:
+        if (elapsedTimeInState() >= N1)
+        {
             carWash->setCarInState();
             blink->setActive(true);
+            this->distanceControlTask->setActive(true);
             setState(CAR_IN);
         }
         break;
     case CAR_IN:
-        if (this->carWash->isCarOutState()) {
+        if (this->carWash->isCarOutState())
+        {
             setState(IDLE);
         }
         break;
@@ -45,12 +50,13 @@ void DetectTask::tick(){
     }
 }
 
-void DetectTask::setState(State s){
+void DetectTask::setState(State s)
+{
     state = s;
     stateTimestamp = millis();
 }
 
-long DetectTask::elapsedTimeInState(){
+long DetectTask::elapsedTimeInState()
+{
     return millis() - stateTimestamp;
 }
-
