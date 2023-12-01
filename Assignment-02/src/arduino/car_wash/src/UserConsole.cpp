@@ -76,8 +76,11 @@ void UserConsole::turnOffDisplay()
 
 void UserConsole::sendMessage(String state, float temp)
 {
-  Serial.println("st:" + state + ":tp:" + String(temp));
-  // MsgService.sendMsg("st:" + state + ":tp:" + String(temp));
+  Serial.print("st:");
+  Serial.print(state);
+  Serial.print(":tp:");
+  Serial.println(temp);
+  // MsgService.sendMsg("st:" + state + ":tp:" + temp);
 }
 
 void UserConsole::displayProgress(int progress)
