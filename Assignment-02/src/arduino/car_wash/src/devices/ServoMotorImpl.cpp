@@ -3,13 +3,16 @@
 
 ServoMotorImpl::ServoMotorImpl(int pin)
 {
+  Serial.println("Motor created");
   this->pin = pin;
+  pinMode(pin, OUTPUT);
+  this->motor = new ServoTimer2();
 }
 
 void ServoMotorImpl::on()
 {
   // updated values: min is 544, max 2400 (see ServoTimer2 doc)
-  motor.attach(pin); //, 544, 2400);
+  motor->attach(pin); //, 544, 2400);
   Serial.println("Motor on");
 }
 
@@ -27,7 +30,7 @@ void ServoMotorImpl::setPosition(int angle)
   // 750 + angle*(2250-750)/180
   // updated values: min is 544, max 2400 (see ServoTimer2 doc)
   float coeff = (2400.0 - 544.0) / 180;
-  motor.write(544 + angle * coeff);
+  motor->write(544 + angle * coeff);
 
   Serial.print("Motor position: ");
   Serial.println(angle == 0     ? "CLOSED"
@@ -38,5 +41,5 @@ void ServoMotorImpl::setPosition(int angle)
 void ServoMotorImpl::off()
 {
   Serial.println("Motor off");
-  motor.detach();
+  motor->detach();
 }
