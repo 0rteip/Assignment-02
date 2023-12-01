@@ -36,7 +36,7 @@ void TemperatureControlTask::tick()
         }
         break;
     case HEATING:
-        if (this->temp < MAX_TEMP)
+        if (this->carWash->isWashingComplete() || this->temp < MAX_TEMP)
         {
             setState(IDLE);
         }
@@ -50,7 +50,6 @@ void TemperatureControlTask::tick()
         if (this->userConsole->problemIsfixed())
         {
             this->carWash->setWashingState();
-            //Serial.println("Maintenance ended");
             setState(IDLE);
         }
         break;
