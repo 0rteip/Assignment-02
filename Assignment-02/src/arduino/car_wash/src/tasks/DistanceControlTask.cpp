@@ -18,9 +18,6 @@ void DistanceControlTask::tick()
         }
         break;
     case WAITING_ENTERING:
-        /* Serial.print("Car distance: ");
-        Serial.println(this->carWash->getCarDistance()); */
-
         if (this->carWash->getCarDistance() > MIN_DISTANCE)
         {
             setState(IDLE);
