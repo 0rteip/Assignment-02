@@ -20,13 +20,13 @@ void DetectTask::tick()
     switch (state)
     {
     case IDLE:
-        this->carWash->off();
+        this->carWash->setInactiveState();
+        delay(1000);
         Serial.flush();
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
         sleep_enable();
         sleep_mode();
         sleep_disable();
-        this->carWash->on();
         this->carWash->setCarDetectState();
         setState(DETECTED);
         break;

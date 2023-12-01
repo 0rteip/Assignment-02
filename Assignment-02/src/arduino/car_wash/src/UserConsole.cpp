@@ -76,16 +76,14 @@ void UserConsole::turnOffDisplay()
 
 void UserConsole::sendMessage(String state, float temp)
 {
-  Serial.print("st:");
-  Serial.print(state);
-  Serial.print(":tp:");
-  Serial.println(temp);
-  // MsgService.sendMsg("st:" + state + ":tp:" + temp);
+    MsgService.sendMsg(String("st:") + state);
+    MsgService.sendMsg(String(":tp:") + temp);
 }
 
 void UserConsole::displayProgress(int progress)
 {
   this->lcd->updateProgress(progress);
+  needScrol = false;
 }
 
 void UserConsole::scroll()
@@ -94,6 +92,11 @@ void UserConsole::scroll()
   {
     this->lcd->scroll();
   }
+}
+
+void UserConsole::clear()
+{
+  this->lcd->clear();
 }
 
 bool UserConsole::problemIsfixed()

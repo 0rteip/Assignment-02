@@ -18,8 +18,8 @@ void DistanceControlTask::tick()
         }
         break;
     case WAITING_ENTERING:
-        Serial.print("Car distance: ");
-        Serial.println(this->carWash->getCarDistance());
+        /* Serial.print("Car distance: ");
+        Serial.println(this->carWash->getCarDistance()); */
 
         if (this->carWash->getCarDistance() > MIN_DISTANCE)
         {
@@ -39,6 +39,11 @@ void DistanceControlTask::tick()
         }
         break;
     case WASHING:
+        if (this->carWash->isMaintenanceNeeded())
+        {
+            setState(MAINTENANCE);
+            break;
+        }
         this->elapsedTime = this->elapsedTimeInState();
         this->carWash->displayProgress(map(this->elapsedTime > N3 ? N3 : this->elapsedTime, 0, N3, 0, 100));
 
@@ -46,10 +51,6 @@ void DistanceControlTask::tick()
         {
             this->carWash->setWashingCompletedState();
             setState(WAITING_LEAVING);
-        }
-        else if (this->carWash->isMaintenanceNeeded())
-        {
-            setState(MAINTENANCE);
         }
         break;
     case MAINTENANCE:

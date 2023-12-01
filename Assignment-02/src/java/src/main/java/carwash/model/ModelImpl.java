@@ -21,7 +21,7 @@ public class ModelImpl implements Model {
     public ModelImpl() {
         // pcs.firePropertyChange(MessageType.WARNING.getTitle(), "message", "msg");
         try {
-            channel = new SerialCommChannel("/dev/ttyACM0", 9600);
+            channel = new SerialCommChannel("/dev/ttyACM0", 115200);
             logger.info("Waiting Arduino for rebooting...");
             Thread.sleep(4000);
 

@@ -15,6 +15,7 @@ public:
     CarWash(UserConsole *userConsole);
 
     // set state
+    void setInactiveState();
     void setCarInState();
     void setCarDetectState();
     void setFullyEnteredState();
@@ -32,10 +33,6 @@ public:
     bool isMaintenanceNeeded();
     bool isMaintenanceComplete();
     bool isCarOutState();
-
-    // sleep
-    void off();
-    void on();
 
     void displayProgress(int progress);
     void scroll();

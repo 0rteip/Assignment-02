@@ -26,7 +26,7 @@ TemperatureControlTask::TemperatureControlTask(CarWash *carWash, UserConsole *us
 void TemperatureControlTask::tick()
 {
     this->checkTemp();
-    //this->userConsole->sendMessage(carWash->recState(), temp);
+    this->userConsole->sendMessage(carWash->getStateDescription(), temp);
     switch (this->state)
     {
     case IDLE:
@@ -50,7 +50,7 @@ void TemperatureControlTask::tick()
         if (this->userConsole->problemIsfixed())
         {
             this->carWash->setWashingState();
-            Serial.println("Maintenance ended");
+            //Serial.println("Maintenance ended");
             setState(IDLE);
         }
         break;

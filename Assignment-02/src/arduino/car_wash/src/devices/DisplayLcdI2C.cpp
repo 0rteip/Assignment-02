@@ -17,7 +17,7 @@ DisplayLcdI2C::DisplayLcdI2C()
     this->lcd->createChar(5, five);
 }
 
-void DisplayLcdI2C::display(String string)
+void DisplayLcdI2C::display(char string[])
 {
     this->clear();
     lcd->print(string);

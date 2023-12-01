@@ -31,6 +31,7 @@ public:
 
   void displayProgress(int progress);
   void scroll();
+  void clear();
 
 private:
   Button *button;

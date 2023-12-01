@@ -8,7 +8,7 @@ class DisplayLcdI2C
 {
 public:
     DisplayLcdI2C();
-    void display(String string);
+    void display(char string[]);
     void updateProgress(int progress);
     void clear();
     void scroll();

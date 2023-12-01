@@ -6,7 +6,7 @@
 #include "devices/TempSensor.h"
 
 // A temperature of X degrees means there an error in the washing area
-#define MAX_TEMP 30
+#define MAX_TEMP 2
 
 class TemperatureControlTask : public Task
 {

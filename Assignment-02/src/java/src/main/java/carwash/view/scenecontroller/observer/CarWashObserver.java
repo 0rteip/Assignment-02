@@ -37,7 +37,7 @@ public final class CarWashObserver implements PropertyChangeListener {
 
     @Override
     public void propertyChange(final PropertyChangeEvent arg0) {
-        logger.info("Property changed: {} {}", arg0.getOldValue(), arg0.getNewValue());
+        //logger.info("Property changed: {} {}", arg0.getOldValue(), arg0.getNewValue());
         if (arg0.getOldValue().equals(ValueType.TEMPERATURE.getValue())) {
             this.mainSceneSetter.setTemperature(arg0.getNewValue().toString());
         } else if (arg0.getOldValue().equals(ValueType.STATUS.getValue())) {

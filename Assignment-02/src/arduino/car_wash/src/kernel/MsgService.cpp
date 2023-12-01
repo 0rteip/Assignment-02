@@ -30,6 +30,9 @@ void MsgServiceClass::init(){
 }
 
 void MsgServiceClass::sendMsg(const String& msg){
+  if(msg.equals("")) {
+    Serial.println("Vuotooo");
+  }
   Serial.println(msg);  
 }
 
