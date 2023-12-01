@@ -32,7 +32,8 @@ private:
     void setState(State state);
     long elapsedTimeInState();
 
-    int elapsedTime =0;
+    int elapsedTime;
+    long lastTimestamp;
     long stateTimestamp;
 
     CarWash *carWash;
