@@ -1,7 +1,5 @@
 package carwash.model.msg_listener;
 
-import java.io.Serial;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,13 +26,12 @@ public class MessageListener extends Thread {
         while (true) {
             try {
                 String msg = channel.receiveMsg();
-                System.out.println("Messaggio: " + msg);
                 String newMsg = msg;
                 if (msg.startsWith(STATE_PREFIX)) {
                     newMsg = newMsg.substring(STATE_PREFIX.length());
                     String stateMsg = findString(newMsg);
                     controller.setState(stateMsg);
-                    
+
                     newMsg = newMsg.substring(stateMsg.length());
                 }
                 if (newMsg.startsWith(TEMP_PREFIX)) {
