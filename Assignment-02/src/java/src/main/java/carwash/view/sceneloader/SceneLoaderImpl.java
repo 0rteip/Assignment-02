@@ -120,7 +120,6 @@ public final class SceneLoaderImpl implements SceneLoader {
 
     @Override
     public void updateValue(final ValueType valueType, final String newValue) {
-        logger.info("Update value {} with {}", valueType.getValue(), newValue);
         this.pcs.firePropertyChange(UPDATE_OBS, valueType.getValue(), newValue);
     }
 }
