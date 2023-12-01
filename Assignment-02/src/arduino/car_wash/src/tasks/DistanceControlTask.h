@@ -32,8 +32,9 @@ private:
     void setState(State state);
     long elapsedTimeInState();
 
-    int remainingTime;
+    int elapsedTime;
     long stateTimestamp;
+
     CarWash *carWash;
     BlinkLedTask *blinkLedTask;
 };

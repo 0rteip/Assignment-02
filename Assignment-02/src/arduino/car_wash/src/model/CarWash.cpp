@@ -25,7 +25,7 @@ CarWash::CarWash(UserConsole *userConsole)
 void CarWash::off()
 {
     this->userConsole->turnOffDisplay();
-    this->userConsole->sendMessage("Sleep", 0.0);
+    this->userConsole->sendMessage(this->getStateDescription(), this->washingAreaTemperture);
 }
 
 void CarWash::on()
@@ -40,6 +40,7 @@ bool CarWash::getPrecence()
 
 void CarWash::setCarDetectState()
 {
+    Serial.println("Car detected");
     leds[0]->switchOn();
     this->userConsole->displayWelcome();
     state = CAR_DETECT;
@@ -57,6 +58,7 @@ bool CarWash::isFullyEnteredState()
 
 void CarWash::setCarInState()
 {
+    Serial.println("Car in");
     this->gate->open();
     this->userConsole->displayProceed();
     state = CAR_IN;
@@ -139,41 +141,43 @@ void CarWash::setWashingAreaTemperture(float temp)
     this->prox->setTemperature(this->washingAreaTemperture);
 }
 
-String CarWash::recState()
+String CarWash::getStateDescription()
 {
     switch (state)
     {
+    case INACTIVE:
+        return String("Inactive");
     case CAR_DETECT:
-        return String("Macchina Individuata");
+        return String("Car detect");
     case CAR_IN:
-        return String("La macchina sta entrando");
+        return String("Car entering");
     case FULLY_ENTERED:
-        return String("La macchina è entrata");
+        return String("Car in");
     case WASHING:
-        return String("Lavaggio");
+        return String("Washing");
     case WASHING_COMPLETED:
-        return String("Lavaggio completato");
+        return String("Washing completed");
     case CAR_OUT:
-        return String("Macchina uscita");
+        return String("Car out");
     case MAINTENANCE:
-        return String("Manutenzione");
+        return String("Maintenance");
     default:
         break;
     }
     return String();
 }
 
-void CarWash::displayProgress(int progress) 
+void CarWash::displayProgress(int progress)
 {
     this->userConsole->displayProgress(progress);
 }
 
-void CarWash::scroll() 
+void CarWash::scroll()
 {
     this->userConsole->scroll();
 }
 
-bool CarWash::isCarOutState() 
+bool CarWash::isCarOutState()
 {
     return state == CAR_OUT;
 }

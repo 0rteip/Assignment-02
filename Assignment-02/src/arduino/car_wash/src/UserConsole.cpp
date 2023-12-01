@@ -55,13 +55,13 @@ void UserConsole::displayWashing()
 void UserConsole::displayWashingCompleted()
 {
   this->lcd->display("Washing complete, you can leave the area");
-  this->needScrol = false;
+  this->needScrol = true;
 }
 
 void UserConsole::displayProblem()
 {
   this->lcd->display("Detected a Problem - Please Wait");
-  this->needScrol = false;
+  this->needScrol = true;
 }
 
 void UserConsole::turnOnDisplay()
@@ -76,7 +76,11 @@ void UserConsole::turnOffDisplay()
 
 void UserConsole::sendMessage(String state, float temp)
 {
-  MsgService.sendMsg("st:" + state + ":tp:" + String(temp));
+  Serial.print("st:");
+  Serial.print(state);
+  Serial.print(":tp:");
+  Serial.println(temp);
+  // MsgService.sendMsg("st:" + state + ":tp:" + temp);
 }
 
 void UserConsole::displayProgress(int progress)

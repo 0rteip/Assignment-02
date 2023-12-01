@@ -1,24 +1,26 @@
 #include "Led.h"
 #include "Arduino.h"
 
-Led::Led(int pin){
-  this->pin = pin;
-  pinMode(pin,OUTPUT);
-  this->on = false;
+Led::Led(int pin)
+{
+    this->pin = pin;
+    this->isOff = true;
+    pinMode(pin, OUTPUT);
 }
 
-bool Led::isOn() {
-    return on;
+bool Led::isOn()
+{
+    return !isOff;
 }
 
-void Led::switchOn(){
-    Serial.println("Accendo");
-    digitalWrite(pin,HIGH);
-    this->on = true;
+void Led::switchOn()
+{
+    digitalWrite(pin, HIGH);
+    this->isOff = false;
 }
 
-void Led::switchOff(){
-    digitalWrite(pin,LOW);
-    this->on = false;
-    Serial.println("Spengo");
+void Led::switchOff()
+{
+    digitalWrite(pin, LOW);
+    this->isOff = true;
 };

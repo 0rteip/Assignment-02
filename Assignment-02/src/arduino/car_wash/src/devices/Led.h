@@ -3,15 +3,17 @@
 
 #include "Light.h"
 
-class Led: public Light { 
+class Led : public Light
+{
 public:
   Led(int pin);
   bool isOn();
   void switchOn();
-  void switchOff();    
+  void switchOff();
+
 protected:
-  int pin;  
-  bool on;
+  int pin;
+  bool isOff;
 };
 
 #endif
