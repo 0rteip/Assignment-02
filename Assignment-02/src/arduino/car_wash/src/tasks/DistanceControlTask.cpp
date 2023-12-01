@@ -29,27 +29,27 @@ void DistanceControlTask::tick()
         {
             this->blinkLedTask->setActive(false);
             this->carWash->setFullyEnteredState();
-            setState(WASHING);
+            setState(WAITING_STARTING);
         }
         break;
     case WAITING_STARTING:
         if (this->carWash->isWashingStarted())
         {
-            this->remainingTime = N3;
             setState(WASHING);
         }
         break;
     case WASHING:
-        this->carWash->displayProgress(map(this->elapsedTimeInState(), 0, N3 + 1, 0, 100));
-        this->remainingTime -= this->elapsedTimeInState();
+        this->elapsedTime = this->elapsedTimeInState();
+        this->carWash->displayProgress(map(this->elapsedTime > N3 ? N3 : this->elapsedTime, 0, N3, 0, 100));
 
-        if (this->carWash->isMaintenanceNeeded())
+        if (this->elapsedTime >= N3)
+        {
+            this->carWash->setWashingCompletedState();
+            setState(WAITING_LEAVING);
+        }
+        else if (this->carWash->isMaintenanceNeeded())
         {
             setState(MAINTENANCE);
-        }
-        else if (this->remainingTime <= 0)
-        {
-            setState(WAITING_LEAVING);
         }
         break;
     case MAINTENANCE:
@@ -61,21 +61,19 @@ void DistanceControlTask::tick()
     case WAITING_LEAVING:
         if (this->carWash->getCarDistance() > MAX_DISTANCE)
         {
-            Serial.println("Car leaving the washing area");
-            this->carWash->setWashingCompletedState();
             setState(LEAVING);
         }
         break;
     case LEAVING:
-        if (this->carWash->getCarDistance() < MAX_DISTANCE)
-        {
-            Serial.println("Car back in the washing area");
-            setState(WAITING_LEAVING);
-        }
-        else if (this->elapsedTimeInState() >= N4)
+        if (this->elapsedTimeInState() >= N4)
         {
             this->carWash->setCarOutState();
+            this->setActive(false);
             setState(IDLE);
+        }
+        else if (this->carWash->getCarDistance() < MAX_DISTANCE)
+        {
+            setState(WAITING_LEAVING);
         }
         break;
     default:
