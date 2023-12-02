@@ -5,40 +5,17 @@
 #include "kernel/Logger.h"
 #include "devices/ButtonImpl.h"
 
-ControlTask::ControlTask(BlinkLedTask* blink, UserConsole* userConsole, CarWash* carWash): blink(blink), userConsole(userConsole), carWash(carWash){
-    this->blink = blink;
-    this->userConsole = userConsole;
-    this->carWash = carWash;
-    setState(IDLE);
+ControlTask::ControlTask(UserConsole *userConsole, CarWash *carWash)
+    : userConsole(userConsole), carWash(carWash)
+{
 }
 
-void ControlTask::tick(){
-    userConsole->sync();
-    switch (state)
+void ControlTask::tick()
+{
+    this->userConsole->sync();
+    if (userConsole->isButtonPressed())
     {
-    case IDLE :
-        if (carWash->isFullyEnteredState()) {
-            setState(WAIT_PRESS);
-        }
-        break;
-    case WAIT_PRESS:
-        if (userConsole->isButtonPressed()) {
-            carWash->setWashingState();  
-            setState(IDLE);
-        }
-        break;
-    default:
-        break;
+        carWash->setWashingState();
+        this->setActive(false);
     }
 }
-
-void ControlTask::setState(State state){
-    this->state = state;
-    stateTimestamp = millis();
-}
-
-long ControlTask::elapsedTimeInState(){
-    return millis() - stateTimestamp;
-}
-
-

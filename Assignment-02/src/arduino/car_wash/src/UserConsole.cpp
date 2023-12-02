@@ -11,7 +11,6 @@ UserConsole::UserConsole()
 {
   this->lcd = new DisplayLcdI2C();
   this->button = new ButtonImpl(BT_PIN);
-  this->needScrol = false;
 }
 
 void UserConsole::init()
@@ -28,42 +27,6 @@ bool UserConsole::isButtonPressed()
   return button->isPressed();
 }
 
-void UserConsole::displayWelcome()
-{
-  this->lcd->display("Welcome");
-  this->needScrol = false;
-}
-
-void UserConsole::displayProceed()
-{
-  this->lcd->display("Proceed to the Washing Area");
-  this->needScrol = true;
-}
-
-void UserConsole::displayReadyToWash()
-{
-  this->lcd->display("Ready to Wash");
-  this->needScrol = false;
-}
-
-void UserConsole::displayWashing()
-{
-  this->lcd->display("Washing");
-  this->needScrol = false;
-}
-
-void UserConsole::displayWashingCompleted()
-{
-  this->lcd->display("Washing complete, you can leave the area");
-  this->needScrol = true;
-}
-
-void UserConsole::displayProblem()
-{
-  this->lcd->display("Detected a Problem - Please Wait");
-  this->needScrol = true;
-}
-
 void UserConsole::turnOnDisplay()
 {
   this->lcd->on();
@@ -74,40 +37,67 @@ void UserConsole::turnOffDisplay()
   this->lcd->off();
 }
 
-void UserConsole::sendMessage(String state, float temp)
+void UserConsole::displayWelcome()
 {
-    MsgService.sendMsg(String("st:") + state);
-    MsgService.sendMsg(String(":tp:") + temp);
+  this->lcd->display("Welcome");
+}
+
+void UserConsole::displayProceed()
+{
+  this->lcd->display("Proceed to the Washing Area");
+}
+
+void UserConsole::displayReadyToWash()
+{
+  this->lcd->display("Ready to Wash");
+}
+
+void UserConsole::displayWashing()
+{
+  this->lcd->display("Washing");
+}
+
+void UserConsole::displayWashingCompleted()
+{
+  this->lcd->display("Washing complete, you can leave the area");
+}
+
+void UserConsole::displayProblem()
+{
+  this->lcd->display("Detected a Problem - Please Wait");
 }
 
 void UserConsole::displayProgress(int progress)
 {
   this->lcd->updateProgress(progress);
-  needScrol = false;
 }
 
 void UserConsole::scroll()
 {
-  if (needScrol)
-  {
-    this->lcd->scroll();
-  }
+
+  this->lcd->scroll();
 }
 
-void UserConsole::clear()
+void UserConsole::sendStatusMessage(String status)
 {
-  this->lcd->clear();
+  MsgService.sendMsg(STATUS_PREFIX + status);
 }
 
-bool UserConsole::problemIsfixed()
+void UserConsole::sendTempMessage(float temp)
 {
-  if (MsgService.isMsgAvailable())
+  MsgService.sendMsg(TEMP_PREFIX + temp);
+}
+
+void UserConsole::sendCarsWashMessage(int cars)
+{
+  MsgService.sendMsg(CARS_WASH_PREFIX + cars);
+}
+
+bool UserConsole::isTemperatureFixed()
+{
+  if (MsgService.isMsgAvailable() && MsgService.receiveMsg()->getContent().equals(TEMP_FIXED_MESSAGE))
   {
-    Msg *msg = MsgService.receiveMsg();
-    if (msg->getContent().equals("Fixed"))
-    {
-      return true;
-    }
+    return true;
   }
   return false;
 }
