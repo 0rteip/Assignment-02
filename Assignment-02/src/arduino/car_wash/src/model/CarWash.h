@@ -38,7 +38,6 @@ public:
     void scroll();
 
     // get data
-    bool getPrecence();
     unsigned long getCarDistance();
     void setWashingAreaTemperture(float temp);
     String getStateDescription();

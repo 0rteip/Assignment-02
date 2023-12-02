@@ -14,18 +14,13 @@ CarWash::CarWash(UserConsole *userConsole)
 {
     pir = new Pir(PIR_PIN);
     attachInterrupt(digitalPinToInterrupt(2), wakeUp, RISING);
+    pir->calibrate();
     leds[0] = new Led(LED1_PIN);
     leds[1] = new Led(LED2_PIN);
     leds[2] = new Led(LED3_PIN);
     prox = new UltrasonicSensor(PROX_PIN);
     gate = new Gate(GATE_PIN);
     state = INACTIVE;
-}
-
-bool CarWash::getPrecence()
-{
-    this->pir->sync();
-    return this->pir->isDetected();
 }
 
 void CarWash::setInactiveState() {
