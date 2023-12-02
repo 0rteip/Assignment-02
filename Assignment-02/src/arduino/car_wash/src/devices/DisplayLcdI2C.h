@@ -4,21 +4,24 @@
 #include <LiquidCrystal_I2C.h>
 #include <Arduino.h>
 
+#define LCD_LENGHT 16
+
 class DisplayLcdI2C
 {
 public:
     DisplayLcdI2C();
-    void display(char string[]);
-    void updateProgress(int progress);
+    void on();
+    void off();
     void clear();
     void scroll();
-    void off();
-    void on();
+    void display(char string[]);
+    void updateProgress(int progress);
 
 private:
     void updateProgressBar(unsigned long progress, unsigned long totalCount, int lineToPrintOn);
 
     LiquidCrystal_I2C *lcd;
+    bool needScroll;
     byte zero[8] = {
         B00000,
         B00000,

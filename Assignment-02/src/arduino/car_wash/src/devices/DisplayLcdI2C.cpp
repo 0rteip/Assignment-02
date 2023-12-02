@@ -4,7 +4,7 @@
 
 DisplayLcdI2C::DisplayLcdI2C()
 {
-    this->lcd = new LiquidCrystal_I2C(0x27, 16, 2);
+    this->lcd = new LiquidCrystal_I2C(0x27, LCD_LENGHT, 2);
     this->lcd->init();
     this->lcd->backlight();
     this->lcd->leftToRight();
@@ -17,20 +17,14 @@ DisplayLcdI2C::DisplayLcdI2C()
     this->lcd->createChar(5, five);
 }
 
-void DisplayLcdI2C::display(char string[])
+void DisplayLcdI2C::on()
 {
-    this->clear();
-    lcd->print(string);
+    this->lcd->backlight();
 }
 
-void DisplayLcdI2C::updateProgress(int progress)
+void DisplayLcdI2C::off()
 {
-    this->lcd->setCursor(0, 0);
-    this->lcd->print("Progress: ");
-    this->lcd->print(progress);
-    this->lcd->print("%");
-
-    this->updateProgressBar(progress, 100, 1);
+    this->lcd->noBacklight();
 }
 
 void DisplayLcdI2C::clear()
@@ -40,17 +34,30 @@ void DisplayLcdI2C::clear()
 
 void DisplayLcdI2C::scroll()
 {
-    this->lcd->scrollDisplayLeft();
+    if (this->needScroll)
+    {
+        this->lcd->scrollDisplayLeft();
+    }
 }
 
-void DisplayLcdI2C::off()
+void DisplayLcdI2C::display(char string[])
 {
-    this->lcd->noBacklight();
+    this->clear();
+    lcd->print(string);
+    // Check id string is longer than 16 chars
+    this->needScroll = strlen(string) > LCD_LENGHT;
 }
 
-void DisplayLcdI2C::on()
+void DisplayLcdI2C::updateProgress(int progress)
 {
-    this->lcd->backlight();
+    this->clear();
+    this->needScroll = false;
+    this->lcd->setCursor(0, 0);
+    this->lcd->print("Progress: ");
+    this->lcd->print(progress);
+    this->lcd->print("%");
+
+    this->updateProgressBar(progress, 100, 1);
 }
 
 void DisplayLcdI2C::updateProgressBar(unsigned long progress, unsigned long totalCount, int lineToPrintOn)
