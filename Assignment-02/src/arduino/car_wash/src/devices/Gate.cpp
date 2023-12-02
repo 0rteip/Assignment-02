@@ -2,6 +2,8 @@
 
 Gate::Gate(int pin) : ServoMotorImpl(pin)
 {
+    this->on();
+    this->close();
 }
 
 void Gate::open()
