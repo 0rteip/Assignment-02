@@ -13,5 +13,4 @@ bool ButtonImpl::isPressed(){
 
 void ButtonImpl::sync(){
   pressed = digitalRead(pin) == HIGH;
-  updateSyncTime(millis());
 }
