@@ -19,7 +19,6 @@ public class ModelImpl implements Model {
     private CommChannel channel;
 
     public ModelImpl() {
-        // pcs.firePropertyChange(MessageType.WARNING.getTitle(), "message", "msg");
         try {
             channel = new SerialCommChannel("/dev/ttyACM0", 115200);
             logger.info("Waiting Arduino for rebooting...");
@@ -44,7 +43,6 @@ public class ModelImpl implements Model {
     @Override
     public void sendMessage() {
         channel.sendMsg(TEMP_FIXED);
-        logger.info("fixeddddddddd");
     }
 
     @Override
