@@ -31,6 +31,7 @@ public:
     bool isWashingStarted();
     bool isWashingComplete();
     bool isMaintenanceNeeded();
+    bool isTemperatureFixed();
     bool isMaintenanceComplete();
     bool isCarOutState();
 
@@ -56,9 +57,10 @@ private:
         MAINTENANCE
     } state;
 
-    bool detect;
-    bool stateL1;
-    float washingAreaTemperture;
+    void swicthState(State s);
+
+    float washingAreaTemperture = 0;
+    int washedCars = 0;
 
     UserConsole *userConsole;
     Pir *pir;

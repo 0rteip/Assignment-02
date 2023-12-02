@@ -12,7 +12,7 @@ class TemperatureControlTask : public Task
 {
 
 public:
-    TemperatureControlTask(CarWash *carWash, UserConsole *userConsole);
+    TemperatureControlTask(CarWash *carWash);
     void tick();
 
 private:
@@ -31,7 +31,6 @@ private:
     float temp;
 
     CarWash *carWash;
-    UserConsole *userConsole;
     TempSensor *tempSensor;
 };
 

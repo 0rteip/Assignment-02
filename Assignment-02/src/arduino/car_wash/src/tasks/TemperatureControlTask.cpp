@@ -9,8 +9,8 @@
 #include "devices/TempSensorTMP36.h"
 #endif
 
-TemperatureControlTask::TemperatureControlTask(CarWash *carWash, UserConsole *userConsole)
-    : carWash(carWash), userConsole(userConsole)
+TemperatureControlTask::TemperatureControlTask(CarWash *carWash)
+    : carWash(carWash)
 {
 #ifdef __TMP36__
     this->tempSensor = new TempSensorTMP36(TEMP_PIN);
@@ -26,7 +26,6 @@ TemperatureControlTask::TemperatureControlTask(CarWash *carWash, UserConsole *us
 void TemperatureControlTask::tick()
 {
     this->checkTemp();
-    this->userConsole->sendMessage(carWash->getStateDescription(), temp);
     switch (this->state)
     {
     case IDLE:
@@ -47,7 +46,7 @@ void TemperatureControlTask::tick()
         }
         break;
     case FIXING:
-        if (this->userConsole->problemIsfixed())
+        if (this->carWash->isTemperatureFixed())
         {
             this->carWash->setWashingState();
             setState(IDLE);
