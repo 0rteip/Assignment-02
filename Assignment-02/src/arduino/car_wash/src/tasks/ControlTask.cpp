@@ -17,13 +17,14 @@ void ControlTask::tick(){
     switch (state)
     {
     case IDLE :
-        if (carWash->isFullyEnteredState()) {
+        if (this->carWash->isFullyEnteredState()) {
             setState(WAIT_PRESS);
         }
         break;
     case WAIT_PRESS:
-        if (userConsole->isButtonPressed()) {
-            carWash->setWashingState();  
+        if (this->userConsole->isButtonPressed()) {
+            this->carWash->setWashingState();
+            this->blink->init(500);
             setState(IDLE);
         }
         break;
@@ -34,7 +35,7 @@ void ControlTask::tick(){
 
 void ControlTask::setState(State state){
     this->state = state;
-    stateTimestamp = millis();
+    this->stateTimestamp = millis();
 }
 
 long ControlTask::elapsedTimeInState(){
