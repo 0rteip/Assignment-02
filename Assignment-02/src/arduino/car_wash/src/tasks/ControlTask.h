@@ -2,17 +2,19 @@
 #define __CONTROL_TASK__
 
 #include "kernel/Task.h"
-#include "model/CarWash.h"
+#include "tasks/BlinkLedTask.h"
 #include "UserConsole.h"
+#include "model/CarWash.h"
 
 class ControlTask : public Task
 {
 
 public:
-    ControlTask(UserConsole *userConsol, CarWash *carWash);
+    ControlTask(BlinkLedTask *blinkLedTask, UserConsole *userConsol, CarWash *carWash);
     void tick();
 
 private:
+    BlinkLedTask *blinkLedTask;
     UserConsole *userConsole;
     CarWash *carWash;
 };

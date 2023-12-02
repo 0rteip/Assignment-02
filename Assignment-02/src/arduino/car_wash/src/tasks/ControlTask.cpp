@@ -1,21 +1,22 @@
-#include "tasks/ControlTask.h"
-#include "tasks/BlinkLedTask.h"
 #include "Arduino.h"
 #include "config.h"
-#include "kernel/Logger.h"
-#include "devices/ButtonImpl.h"
+#include "tasks/ControlTask.h"
+#include "tasks/BlinkLedTask.h"
+#include "UserConsole.h"
+#include "model/CarWash.h"
 
-ControlTask::ControlTask(UserConsole *userConsole, CarWash *carWash)
-    : userConsole(userConsole), carWash(carWash)
+ControlTask::ControlTask(BlinkLedTask *blinkLedTask, UserConsole *userConsole, CarWash *carWash)
+    : blinkLedTask(blinkLedTask), userConsole(userConsole), carWash(carWash)
 {
 }
 
 void ControlTask::tick()
 {
     this->userConsole->sync();
-    if (userConsole->isButtonPressed())
+    if (this->userConsole->isButtonPressed())
     {
-        carWash->setWashingState();
+        this->carWash->setWashingState();
+        this->blinkLedTask->init(500);
         this->setActive(false);
     }
 }
