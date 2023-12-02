@@ -4,7 +4,7 @@
 #include "ServoMotorImpl.h"
 
 #define OPEN_ANGLE 2250
-#define CLOSE_ANGLE 900
+#define CLOSE_ANGLE 1570
 
 class Gate : public ServoMotorImpl
 {
