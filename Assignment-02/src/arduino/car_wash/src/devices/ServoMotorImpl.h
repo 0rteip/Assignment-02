@@ -12,8 +12,10 @@ public:
   ServoMotorImpl(int pin);
 
   void on();
-  void setPosition(int angle);
   void off();
+
+protected:
+  void setPosition(int angle);
 
 private:
   int pin;
