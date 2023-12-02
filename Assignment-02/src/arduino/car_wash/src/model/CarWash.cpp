@@ -31,7 +31,6 @@ void CarWash::setInactiveState() {
 
 void CarWash::setCarDetectState()
 {
-    //Serial.println("Car detected");
     leds[0]->switchOn();
     this->userConsole->turnOnDisplay();
     this->userConsole->displayWelcome();
@@ -50,7 +49,6 @@ bool CarWash::isFullyEnteredState()
 
 void CarWash::setCarInState()
 {
-    //Serial.println("Car in");
     this->gate->open();
     this->userConsole->displayProceed();
     state = CAR_IN;
@@ -67,14 +65,12 @@ void CarWash::setFullyEnteredState()
     this->gate->close();
     this->userConsole->displayReadyToWash();
     state = FULLY_ENTERED;
-    //Serial.println("Car fully entered, ready to wash");
 }
 
 void CarWash::setWashingState()
 {
     this->state = WASHING;
     this->userConsole->clear();
-    //Serial.println("Washing");
 }
 
 bool CarWash::isWashingStarted()
@@ -87,7 +83,6 @@ void CarWash::setWashingCompletedState()
     this->leds[1]->switchOff();
     this->leds[2]->switchOn();
     this->userConsole->displayWashingCompleted();
-    //Serial.println("Washing completed, you can leave");
     this->gate->open();
     this->state = WASHING_COMPLETED;
 }
@@ -101,7 +96,6 @@ void CarWash::setCarOutState()
 {
     this->leds[2]->switchOff();
     this->userConsole->turnOffDisplay();
-    //Serial.println("Car out of the washing area");
     this->gate->close();
     this->state = CAR_OUT;
 }
@@ -109,7 +103,6 @@ void CarWash::setCarOutState()
 void CarWash::setMaintenanceState()
 {
     this->userConsole->displayProblem();
-    //Serial.println("Maintenance started");
     this->state = MAINTENANCE;
 }
 
