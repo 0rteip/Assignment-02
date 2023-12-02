@@ -28,7 +28,7 @@ void setup()
     blinkLedTask->init(100);
     blinkLedTask->setActive(false);
 
-    ControlTask *butTask = new ControlTask(blinkLedTask, userConsole, carWash);
+    ControlTask *butTask = new ControlTask(userConsole, carWash);
     butTask->init(50);
     butTask->setActive(false);
 
@@ -38,7 +38,7 @@ void setup()
     Task *detectTask = new DetectTask(carWash, washingAreaControlTask, blinkLedTask);
     detectTask->init(1000);
 
-    Task *tempTask = new TemperatureControlTask(carWash, userConsole);
+    Task *tempTask = new TemperatureControlTask(carWash);
     tempTask->init(1000);
 
     sched->addTask(blinkLedTask);
