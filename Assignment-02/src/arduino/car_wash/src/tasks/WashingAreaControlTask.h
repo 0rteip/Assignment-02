@@ -1,20 +1,21 @@
-#ifndef __DISTANCE_CONTROL_TASK__
-#define __DISTANCE_CONTROL_TASK__
+#ifndef __WASHING_AREA_CONTROL_TASK__
+#define __WASHING_AREA_CONTROL_TASK__
 
 #include "kernel/Task.h"
 #include "model/CarWash.h"
 #include "tasks/BlinkLedTask.h"
+#include "tasks/ControlTask.h"
 
 // A distance of 100 cm is the distance to consider a car is in the washing area
 #define MIN_DISTANCE 8
 // A distance of 500 cm is the distance to consider a car is out the washing area
 #define MAX_DISTANCE 8
 
-class DistanceControlTask : public Task
+class WashingAreaControlTask : public Task
 {
 
 public:
-    DistanceControlTask(CarWash *carWash, BlinkLedTask *blinkLedTask);
+    WashingAreaControlTask(CarWash *carWash, BlinkLedTask *blinkLedTask, ControlTask *controlTask);
     void tick();
 
 private:
@@ -38,6 +39,7 @@ private:
 
     CarWash *carWash;
     BlinkLedTask *blinkLedTask;
+    ControlTask *controlTask;
 };
 
 #endif

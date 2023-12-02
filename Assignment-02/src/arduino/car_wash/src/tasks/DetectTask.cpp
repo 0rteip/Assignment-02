@@ -3,11 +3,11 @@
 #include "config.h"
 #include "kernel/Logger.h"
 #include "tasks/BlinkLedTask.h"
-#include "tasks/DistanceControlTask.h"
+#include "tasks/WashingAreaControlTask.h"
 #include <avr/sleep.h>
 
-DetectTask::DetectTask(CarWash *carWash, DistanceControlTask *distanceControlTask, BlinkLedTask *blink)
-    : carWash(carWash), distanceControlTask(distanceControlTask), blink(blink)
+DetectTask::DetectTask(CarWash *carWash, WashingAreaControlTask *washingAreaControlTask, BlinkLedTask *blink)
+    : carWash(carWash), washingAreaControlTask(washingAreaControlTask), blink(blink)
 {
     this->carWash = carWash;
     this->blink = blink;
@@ -35,7 +35,7 @@ void DetectTask::tick()
         {
             carWash->setCarInState();
             blink->setActive(true);
-            this->distanceControlTask->setActive(true);
+            this->washingAreaControlTask->setActive(true);
             setState(CAR_IN);
         }
         break;

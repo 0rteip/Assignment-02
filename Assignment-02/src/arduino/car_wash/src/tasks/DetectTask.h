@@ -5,13 +5,13 @@
 #include "kernel/TaskWithReinit.h"
 #include "model/CarWash.h"
 #include "tasks/BlinkLedTask.h"
-#include "tasks/DistanceControlTask.h"
+#include "tasks/WashingAreaControlTask.h"
 
 class DetectTask : public Task
 {
 
 public:
-  DetectTask(CarWash *carWash, DistanceControlTask *distanceControlTask, BlinkLedTask *blinkTask);
+  DetectTask(CarWash *carWash, WashingAreaControlTask *washingAreaControlTask , BlinkLedTask *blinkTask);
   void tick();
 
 private:
@@ -27,7 +27,7 @@ private:
   long elapsedTimeInState();
 
   CarWash *carWash;
-  DistanceControlTask *distanceControlTask;
+  WashingAreaControlTask *washingAreaControlTask;
   BlinkLedTask *blink;
 };
 

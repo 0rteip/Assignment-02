@@ -6,12 +6,10 @@
 #include "tasks/DetectTask.h"
 #include "tasks/BlinkLedTask.h"
 #include "tasks/ControlTask.h"
-#include "tasks/DistanceControlTask.h"
+#include "tasks/WashingAreaControlTask.h"
 #include "tasks/TemperatureControlTask.h"
 #include "kernel/TaskWithReinit.h"
 #include "UserConsole.h"
-
-#include "devices/DisplayLcdI2C.h"
 
 Scheduler *sched;
 CarWash *carWash;
@@ -30,22 +28,23 @@ void setup()
     blinkLedTask->init(100);
     blinkLedTask->setActive(false);
 
-    Task *butTask = new ControlTask(blinkLedTask, userConsole, carWash);
-    butTask->init(150);
+    ControlTask *butTask = new ControlTask(blinkLedTask, userConsole, carWash);
+    butTask->init(50);
+    butTask->setActive(false);
 
-    DistanceControlTask *distanceControlTask = new DistanceControlTask(carWash, blinkLedTask);
-    distanceControlTask->init(500);
+    WashingAreaControlTask *washingAreaControlTask = new WashingAreaControlTask(carWash, blinkLedTask, butTask);
+    washingAreaControlTask->init(500);
 
-    Task *detectTask = new DetectTask(carWash, distanceControlTask, blinkLedTask);
+    Task *detectTask = new DetectTask(carWash, washingAreaControlTask, blinkLedTask);
     detectTask->init(1000);
 
     Task *tempTask = new TemperatureControlTask(carWash, userConsole);
-    tempTask->init(500);
+    tempTask->init(1000);
 
     sched->addTask(blinkLedTask);
     sched->addTask(butTask);
     sched->addTask(detectTask);
-    sched->addTask(distanceControlTask);
+    sched->addTask(washingAreaControlTask);
     sched->addTask(tempTask);
 }
 

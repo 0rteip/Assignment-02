@@ -1,13 +1,13 @@
 #include "Arduino.h"
-#include "DistanceControlTask.h"
+#include "WashingAreaControlTask.h"
 
-DistanceControlTask::DistanceControlTask(CarWash *carWash, BlinkLedTask *blinkLedTask)
-    : carWash(carWash), blinkLedTask(blinkLedTask)
+WashingAreaControlTask::WashingAreaControlTask(CarWash *carWash, BlinkLedTask *blinkLedTask, ControlTask *controlTask)
+    : carWash(carWash), blinkLedTask(blinkLedTask), controlTask(controlTask)
 {
     this->state = IDLE;
 }
 
-void DistanceControlTask::tick()
+void WashingAreaControlTask::tick()
 {
     switch (this->state)
     {
@@ -25,6 +25,7 @@ void DistanceControlTask::tick()
         else if (this->elapsedTimeInState() >= N2)
         {
             this->blinkLedTask->setActive(false);
+            this->controlTask->setActive(true);
             this->carWash->setFullyEnteredState();
             setState(WAITING_STARTING);
         }
@@ -84,13 +85,13 @@ void DistanceControlTask::tick()
     }
 }
 
-void DistanceControlTask::setState(State state)
+void WashingAreaControlTask::setState(State state)
 {
     this->state = state;
     this->stateTimestamp = millis();
 }
 
-long DistanceControlTask::elapsedTimeInState()
+long WashingAreaControlTask::elapsedTimeInState()
 {
     return millis() - this->stateTimestamp;
 }
