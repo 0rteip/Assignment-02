@@ -20,4 +20,12 @@ public interface MainSceneSetter {
      *             text to set
      */
     void setTemperature(String text);
+
+    /**
+     * Set text to Cars washed field.
+     * 
+     * @param string
+     *               text to set
+     */
+    void setCarsWashed(String string);
 }

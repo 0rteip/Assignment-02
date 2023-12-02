@@ -3,14 +3,12 @@ package carwash.controller;
 import carwash.model.Model;
 import carwash.model.ModelImpl;
 import carwash.model.message.Message;
-import carwash.model.msg_listener.MessageListener;
+import carwash.model.msglistener.MessageListener;
 import carwash.model.valuetype.ValueType;
 import carwash.view.View;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public final class ControllerImpl implements Controller {
-
-    // private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final Model model = new ModelImpl();
     private final View view;
@@ -31,13 +29,8 @@ public final class ControllerImpl implements Controller {
     // @formatter:on
     public ControllerImpl(final View view) {
         this.view = view;
-        try {
-            this.checker = new MessageListener(model.getChannel(), this);
-            checker.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // this.model.addListener(new NewsObserver(this));
+        this.checker = new MessageListener(model.getChannel(), this);
+        checker.start();
     }
 
     @Override
@@ -59,6 +52,11 @@ public final class ControllerImpl implements Controller {
     public void setTemp(String temp) {
         this.view.updateValue(ValueType.TEMPERATURE, temp);
 
+    }
+
+    @Override
+    public void setCarsWashed(String string) {
+        this.view.updateValue(ValueType.CARS_WASHED, string);
     }
 
     @Override

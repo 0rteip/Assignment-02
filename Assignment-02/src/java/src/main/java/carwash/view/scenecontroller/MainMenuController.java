@@ -15,6 +15,9 @@ public final class MainMenuController extends AbstractSceneController implements
     private TextField tempField;
 
     @FXML
+    private TextField carsWashedField;
+
+    @FXML
     public void fixTemperature() {
         this.getView().fixMessage();
     }
@@ -27,5 +30,10 @@ public final class MainMenuController extends AbstractSceneController implements
     @Override
     public void setTemperature(String text) {
         this.tempField.setText(text);
+    }
+
+    @Override
+    public void setCarsWashed(String string) {
+        this.carsWashedField.setText(string);
     }
 }

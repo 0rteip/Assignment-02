@@ -20,8 +20,9 @@ public interface Controller {
      */
     void quit();
 
-     /**
+    /**
      * Update state value in view.
+     * 
      * @param state
      */
     void setState(String state);
@@ -32,6 +33,14 @@ public interface Controller {
      * @param temp
      */
     void setTemp(String temp);
+
+    /**
+     * Update cars washed value in view.
+     * 
+     * @param string
+     */
+    void setCarsWashed(String string);
+
     /**
      * Send a message to arduino.
      */

@@ -10,7 +10,12 @@ public enum ValueType {
     /**
      * Status.
      */
-    STATUS("Status");
+    STATUS("Status"),
+
+    /**
+     * Cars washed.
+     */
+    CARS_WASHED("Cars washed");
 
     private final String value;
 
