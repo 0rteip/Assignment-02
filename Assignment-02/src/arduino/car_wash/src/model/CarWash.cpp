@@ -14,6 +14,7 @@ CarWash::CarWash(UserConsole *userConsole)
 {
     this->pir = new Pir(PIR_PIN);
     attachInterrupt(digitalPinToInterrupt(PIR_PIN), wakeUp, RISING);
+    this->userConsole->sendStatusMessage(String("Calibration"));
     pir->calibrate();
     this->leds[0] = new Led(LED1_PIN);
     this->leds[1] = new Led(LED2_PIN);
@@ -79,7 +80,10 @@ void CarWash::setWashingCompletedState()
 
 void CarWash::setCarOutState()
 {
-    this->leds[2]->switchOff();
+    int i;
+    for (i=0; i<LED_NUM; i++) {
+        this->leds[i]->switchOff();
+    }
     this->userConsole->turnOffDisplay();
     this->gate->close();
     this->swicthState(CAR_OUT);
