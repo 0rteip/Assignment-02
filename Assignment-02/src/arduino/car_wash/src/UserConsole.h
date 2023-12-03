@@ -41,7 +41,6 @@ public:
 private:
   Button *button;
   DisplayLcdI2C *lcd;
-  bool needScrol;
 };
 
 #endif
