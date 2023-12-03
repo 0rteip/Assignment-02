@@ -71,6 +71,7 @@ void WashingAreaControlTask::tick()
     case LEAVING:
         if (this->elapsedTimeInState() >= N4)
         {
+            this->blinkLedTask->setActive(false);
             this->carWash->setCarOutState();
             this->setActive(false);
             setState(IDLE);
