@@ -28,11 +28,11 @@ void setup()
     blinkLedTask->init(100);
     blinkLedTask->setActive(false);
 
-    ControlTask *butTask = new ControlTask(userConsole, carWash);
-    butTask->init(50);
-    butTask->setActive(false);
+    ControlTask *controlTask = new ControlTask(blinkLedTask, userConsole, carWash);
+    controlTask->init(50);
+    controlTask->setActive(false);
 
-    WashingAreaControlTask *washingAreaControlTask = new WashingAreaControlTask(carWash, blinkLedTask, butTask);
+    WashingAreaControlTask *washingAreaControlTask = new WashingAreaControlTask(carWash, blinkLedTask, controlTask);
     washingAreaControlTask->init(500);
 
     Task *detectTask = new DetectTask(carWash, washingAreaControlTask, blinkLedTask);
@@ -42,7 +42,7 @@ void setup()
     tempTask->init(1000);
 
     sched->addTask(blinkLedTask);
-    sched->addTask(butTask);
+    sched->addTask(controlTask);
     sched->addTask(detectTask);
     sched->addTask(washingAreaControlTask);
     sched->addTask(tempTask);
