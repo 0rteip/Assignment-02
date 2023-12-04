@@ -15,7 +15,7 @@ DetectTask::DetectTask(CarWash *carWash, WashingAreaControlTask *washingAreaCont
 void DetectTask::tick()
 {
     this->carWash->scroll();
-    switch (state)
+    switch (this->state)
     {
     case IDLE:
         this->carWash->setInactiveState();
@@ -51,11 +51,11 @@ void DetectTask::tick()
 
 void DetectTask::setState(State s)
 {
-    state = s;
-    stateTimestamp = millis();
+    this->state = s;
+    this->stateTimestamp = millis();
 }
 
 long DetectTask::elapsedTimeInState()
 {
-    return millis() - stateTimestamp;
+    return millis() - this->stateTimestamp;
 }
