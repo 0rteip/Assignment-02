@@ -1,6 +1,7 @@
 package carwash.view.scenecontroller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 /**
@@ -18,13 +19,25 @@ public final class MainMenuController extends AbstractSceneController implements
     private TextField carsWashedField;
 
     @FXML
+    private Button fixButton;
+
+    @FXML
     public void fixTemperature() {
         this.getView().fixMessage();
+        this.fixButton.setVisible(false);
+    }
+
+    @Override
+    public void initializeScene() {
+        this.fixButton.setVisible(false);
     }
 
     @Override
     public void setStatus(String text) {
         this.stateField.setText(text);
+        if (text.equals("Maintenance")) {
+            this.fixButton.setVisible(true);
+        }
     }
 
     @Override

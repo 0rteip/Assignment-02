@@ -101,15 +101,10 @@ public final class SceneLoaderImpl implements SceneLoader {
     private void initializeScene(final SceneController controller, final SceneStyle sceneStyle) {
         controller.setSceneManager(this.view.getSceneManager());
         controller.setView(this.view);
-        switch (sceneStyle) {
-            case INITIALMENU:
-                if (!this.pcs.hasListeners(UPDATE_OBS)) {
-                    final MainSceneSetter sceneSetter = (MainSceneSetter) controller;
-                    this.pcs.addPropertyChangeListener(UPDATE_OBS, new CarWashObserver(sceneSetter));
-                }
-                break;
-            default:
-                break;
+        if (sceneStyle == SceneStyle.INITIALMENU && !this.pcs.hasListeners(UPDATE_OBS)) {
+            final MainSceneSetter sceneSetter = (MainSceneSetter) controller;
+            this.pcs.addPropertyChangeListener(UPDATE_OBS, new CarWashObserver(sceneSetter));
+            sceneSetter.initializeScene();
         }
     }
 

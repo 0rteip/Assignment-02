@@ -26,17 +26,16 @@ public class MessageListener extends Thread {
 
         while (true) {
             try {
-                String msg = channel.receiveMsg();
-                String newMsg = msg;
-                if (msg.startsWith(STATE_PREFIX)) {
+                String newMsg = channel.receiveMsg();
+                if (newMsg.startsWith(STATE_PREFIX)) {
                     newMsg = newMsg.substring(STATE_PREFIX.length());
                     controller.setState(newMsg);
-                } else if (msg.startsWith(TEMP_PREFIX)) {
+                } else if (newMsg.startsWith(TEMP_PREFIX)) {
                     newMsg = newMsg.substring(TEMP_PREFIX.length());
-                    controller.setTemp(findString(newMsg));
-                } else if (msg.startsWith(CARS_WASHED_PREFIX)) {
+                    controller.setTemp(newMsg);
+                } else if (newMsg.startsWith(CARS_WASHED_PREFIX)) {
                     newMsg = newMsg.substring(CARS_WASHED_PREFIX.length());
-                    controller.setCarsWashed(findString(newMsg));
+                    controller.setCarsWashed(newMsg);
                 }
 
             } catch (InterruptedException e) {
@@ -44,18 +43,5 @@ public class MessageListener extends Thread {
                 Thread.currentThread().interrupt();
             }
         }
-    }
-
-    private String findString(final String string) {
-        final StringBuilder finalString = new StringBuilder();
-        String tmp = string;
-        while (string.length() > 0 && !tmp.startsWith(TEMP_PREFIX)) {
-            finalString.append(tmp.charAt(0));
-            if (tmp.length() < 2) {
-                break;
-            }
-            tmp = tmp.substring(1);
-        }
-        return finalString.toString();
     }
 }

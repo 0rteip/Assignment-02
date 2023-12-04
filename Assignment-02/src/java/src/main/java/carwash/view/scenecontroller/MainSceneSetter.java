@@ -6,6 +6,11 @@ package carwash.view.scenecontroller;
 public interface MainSceneSetter {
 
     /**
+     * Initialize the scene.
+     */
+    void initializeScene();
+
+    /**
      * Set text to Status field.
      * 
      * @param text
