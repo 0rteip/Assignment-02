@@ -1,12 +1,12 @@
 #ifndef __BUTTON__
 #define __BUTTON__
 
-class Button {
- 
+class Button
+{
+
 public:
-  Button();
   virtual bool isPressed() = 0;
-  virtual void sync();
+  virtual void sync() = 0;
 };
 
 #endif
