@@ -20,8 +20,8 @@
 
 #define GATE_PIN 9
 
-#define N1 4000
-#define N2 5000
-#define N3 15000
-#define N4 6000
+#define N1 3000
+#define N2 3000
+#define N3 13000
+#define N4 3000
 #endif

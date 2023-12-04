@@ -14,10 +14,6 @@ public:
   void setPeriod(int newPeriod){
       this->myPeriod = newPeriod;
   }
-
-  long elapsedTimeInState(){
-      return millis() - stateTimestamp;
-  }
   
 private:
   int state;

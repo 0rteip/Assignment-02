@@ -15,13 +15,13 @@ CarWash::CarWash(UserConsole *userConsole)
     this->pir = new Pir(PIR_PIN);
     attachInterrupt(digitalPinToInterrupt(PIR_PIN), wakeUp, RISING);
     this->userConsole->sendStatusMessage(String("Calibration"));
-    pir->calibrate();
     this->leds[0] = new Led(LED1_PIN);
     this->leds[1] = new Led(LED2_PIN);
     this->leds[2] = new Led(LED3_PIN);
     this->prox = new UltrasonicSensor(PROX_PIN);
     this->gate = new Gate(GATE_PIN);
     this->swicthState(INACTIVE);
+    this->pir->calibrate();
 }
 
 unsigned long CarWash::getCarDistance()
@@ -109,17 +109,17 @@ void CarWash::setWashingAreaTemperture(float temp)
 
 bool CarWash::isCarDetectState()
 {
-    return state == CAR_DETECT;
+    return this->state == CAR_DETECT;
 }
 
 bool CarWash::isFullyEnteredState()
 {
-    return state == FULLY_ENTERED;
+    return this->state == FULLY_ENTERED;
 }
 
 bool CarWash::isCarInState()
 {
-    return state == CAR_IN;
+    return this->state == CAR_IN;
 }
 
 bool CarWash::isWashingStarted()
@@ -144,7 +144,7 @@ bool CarWash::isMaintenanceComplete()
 
 bool CarWash::isCarOutState()
 {
-    return state == CAR_OUT;
+    return this->state == CAR_OUT;
 }
 
 void CarWash::scroll()
@@ -154,7 +154,7 @@ void CarWash::scroll()
 
 String CarWash::getStateDescription()
 {
-    switch (state)
+    switch (this->state)
     {
     case INACTIVE:
         return String("Inactive");

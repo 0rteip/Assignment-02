@@ -9,8 +9,6 @@
 DetectTask::DetectTask(CarWash *carWash, WashingAreaControlTask *washingAreaControlTask, BlinkLedTask *blink)
     : carWash(carWash), washingAreaControlTask(washingAreaControlTask), blink(blink)
 {
-    this->carWash = carWash;
-    this->blink = blink;
     setState(IDLE);
 }
 
@@ -33,8 +31,9 @@ void DetectTask::tick()
     case DETECTED:
         if (elapsedTimeInState() >= N1)
         {
-            carWash->setCarInState();
-            blink->setActive(true);
+            this->carWash->setCarInState();
+            this->blink->setPeriod(300);
+            this->blink->setActive(true);
             this->washingAreaControlTask->setActive(true);
             setState(CAR_IN);
         }

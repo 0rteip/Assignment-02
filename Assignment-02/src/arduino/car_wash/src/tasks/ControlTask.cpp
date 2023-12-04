@@ -16,7 +16,8 @@ void ControlTask::tick()
     if (this->userConsole->isButtonPressed())
     {
         this->carWash->setWashingState();
-        this->blinkLedTask->init(500);
+        this->blinkLedTask->setPeriod(500);
+        this->blinkLedTask->setActive(true);
         this->setActive(false);
     }
 }

@@ -35,6 +35,7 @@ void WashingAreaControlTask::tick()
         {
             this->elapsedTime = 0;
             this->lastTimestamp = 0;
+            this->controlTask->setActive(false);
             setState(WASHING);
         }
         break;

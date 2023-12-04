@@ -25,7 +25,7 @@ void setup()
     carWash = new CarWash(userConsole);
 
     BlinkLedTask *blinkLedTask = new BlinkLedTask(LED2_PIN);
-    blinkLedTask->init(100);
+    blinkLedTask->init(300);
     blinkLedTask->setActive(false);
 
     ControlTask *controlTask = new ControlTask(blinkLedTask, userConsole, carWash);
