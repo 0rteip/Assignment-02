@@ -1,10 +1,10 @@
 #ifndef __USER_CONSOLE__
 #define __USER_CONSOLE__
 
+#include <Wire.h>
 #include "config.h"
 #include "devices/Button.h"
 #include "devices/DisplayLcdI2C.h"
-#include <Wire.h>
 
 #define STATUS_PREFIX String("st:")
 #define TEMP_PREFIX String("tp:")

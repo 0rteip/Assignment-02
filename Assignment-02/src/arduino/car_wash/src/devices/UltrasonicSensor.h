@@ -16,7 +16,7 @@ public:
 
 private:
     float temp = BASE_TEMP;
-    float factor = sqrt(1 + this->temp / 273.15) / 60.368;
+    float factor = sqrt(1 + BASE_TEMP / 273.15) / 60.368;
     NewPing *sensor;
 };
 

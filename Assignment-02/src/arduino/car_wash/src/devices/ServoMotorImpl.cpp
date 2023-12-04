@@ -10,7 +10,7 @@ ServoMotorImpl::ServoMotorImpl(int pin)
 
 void ServoMotorImpl::on()
 {
-  motor->attach(pin);
+  this->motor->attach(this->pin);
 }
 
 void ServoMotorImpl::setPosition(int angle)
@@ -30,7 +30,7 @@ void ServoMotorImpl::setPosition(int angle)
   // Serial.print("Motor position: ");
   // Serial.println(map(angle, 750, 2250, 0, 180));
 
-  motor->write(angle);
+  this->motor->write(angle);
   delay(900);
 
   /* Serial.print("Motor position: ");
@@ -41,5 +41,5 @@ void ServoMotorImpl::setPosition(int angle)
 
 void ServoMotorImpl::off()
 {
-  motor->detach();
+  this->motor->detach();
 }
