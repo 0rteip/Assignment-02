@@ -1,45 +1,39 @@
-#ifndef __MSGSERVICE__
-#define __MSGSERVICE__
+#ifndef __MSG_SERVICE__
+#define __MSG_SERVICE__
 
 #include "Arduino.h"
 
-class Msg {
+class Msg
+{
   String content;
 
 public:
-  Msg(String content){
+  Msg(String content)
+  {
     this->content = content;
   }
-  
-  String getContent(){
-    return content;
+
+  String getContent()
+  {
+    return this->content;
   }
 };
 
-class Pattern {
-public:
-  virtual boolean match(const Msg& m) = 0;  
-};
+class MsgServiceClass
+{
 
-class MsgServiceClass {
-    
-public: 
-  
-  Msg* currentMsg;
+public:
+  Msg *currentMsg;
   bool msgAvailable;
 
-  void init();  
+  void init();
 
   bool isMsgAvailable();
-  Msg* receiveMsg();
+  Msg *receiveMsg();
 
-  bool isMsgAvailable(Pattern& pattern);
-  Msg* receiveMsg(Pattern& pattern);
-  
-  void sendMsg(const String& msg);
+  void sendMsg(const String &msg);
 };
 
 extern MsgServiceClass MsgService;
 
 #endif
-

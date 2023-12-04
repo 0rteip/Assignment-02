@@ -2,7 +2,6 @@
 #define __DETECT_TASK__
 
 #include "kernel/Task.h"
-#include "kernel/TaskWithReinit.h"
 #include "model/CarWash.h"
 #include "tasks/BlinkLedTask.h"
 #include "tasks/WashingAreaControlTask.h"

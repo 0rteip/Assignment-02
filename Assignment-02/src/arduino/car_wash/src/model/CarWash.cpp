@@ -3,7 +3,6 @@
 #include "devices/Led.h"
 #include "devices/UltrasonicSensor.h"
 #include "devices/Gate.h"
-#include "kernel/Logger.h"
 #include "CarWash.h"
 #include <Arduino.h>
 

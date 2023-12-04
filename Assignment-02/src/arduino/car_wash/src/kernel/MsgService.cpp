@@ -6,14 +6,14 @@ String content;
 MsgServiceClass MsgService;
 
 bool MsgServiceClass::isMsgAvailable(){
-  return msgAvailable;
+  return this->msgAvailable;
 }
 
 Msg* MsgServiceClass::receiveMsg(){
-  if (msgAvailable){
-    Msg* msg = currentMsg;
-    msgAvailable = false;
-    currentMsg = NULL;
+  if (this->msgAvailable){
+    Msg* msg = this->currentMsg;
+    this->msgAvailable = false;
+    this->currentMsg = NULL;
     content = "";
     return msg;  
   } else {
@@ -25,8 +25,8 @@ void MsgServiceClass::init(){
   Serial.begin(115200);
   content.reserve(256);
   content = "";
-  currentMsg = NULL;
-  msgAvailable = false;  
+  this->currentMsg = NULL;
+  this->msgAvailable = false;  
 }
 
 void MsgServiceClass::sendMsg(const String& msg){
@@ -44,22 +44,6 @@ void serialEvent() {
       content += ch;      
     }
   }
-}
-
-bool MsgServiceClass::isMsgAvailable(Pattern& pattern){
-  return (msgAvailable && pattern.match(*currentMsg));
-}
-
-Msg* MsgServiceClass::receiveMsg(Pattern& pattern){
-  if (msgAvailable && pattern.match(*currentMsg)){
-    Msg* msg = currentMsg;
-    msgAvailable = false;
-    currentMsg = NULL;
-    content = "";
-    return msg;  
-  } else {
-    return NULL; 
-  } 
 }
 
 

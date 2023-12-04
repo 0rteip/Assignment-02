@@ -5,7 +5,6 @@
 #include "kernel/MsgService.h"
 #include <avr/sleep.h>
 #include "config.h"
-#include "kernel/Logger.h"
 
 UserConsole::UserConsole()
 {

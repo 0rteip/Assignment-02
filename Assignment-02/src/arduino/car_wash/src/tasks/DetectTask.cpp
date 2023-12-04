@@ -1,7 +1,6 @@
 #include "tasks/DetectTask.h"
 #include "Arduino.h"
 #include "config.h"
-#include "kernel/Logger.h"
 #include "tasks/BlinkLedTask.h"
 #include "tasks/WashingAreaControlTask.h"
 #include <avr/sleep.h>

@@ -1,7 +1,6 @@
 #include "tasks/BlinkLedTask.h"
 #include "Arduino.h"
 #include "config.h"
-#include "kernel/Logger.h"
 
 BlinkLedTask::BlinkLedTask(int pin) {
     setState(OFF);
