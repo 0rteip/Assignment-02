@@ -12,19 +12,19 @@ BlinkLedTask::BlinkLedTask(int pin) {
 void BlinkLedTask::init(int period) {
     Task::init(period);
     this->led = new Led(pin); 
-    state = OFF;
+    this->setState(OFF);
 }
 
 void BlinkLedTask::tick(){
-    switch (state)
+    switch (this->state)
     {
     case OFF:
         digitalWrite(pin, HIGH);
-        state = ON;
+        this->setState(ON);
         break;
     case ON :
         digitalWrite(pin, LOW);
-        state = OFF;
+        this->setState(OFF);
     default:
         break;
     }
@@ -32,10 +32,10 @@ void BlinkLedTask::tick(){
 
 void BlinkLedTask::setState(State s)
 {
-    state = s;
-    stateTimestamp = millis();
+    this->state = s;
+    this->stateTimestamp = millis();
 }
 
 long BlinkLedTask::elapsedTimeInState(){
-    return millis() - stateTimestamp;
+    return millis() - this->stateTimestamp;
 }

@@ -109,17 +109,17 @@ void CarWash::setWashingAreaTemperture(float temp)
 
 bool CarWash::isCarDetectState()
 {
-    return state == CAR_DETECT;
+    return this->state == CAR_DETECT;
 }
 
 bool CarWash::isFullyEnteredState()
 {
-    return state == FULLY_ENTERED;
+    return this->state == FULLY_ENTERED;
 }
 
 bool CarWash::isCarInState()
 {
-    return state == CAR_IN;
+    return this->state == CAR_IN;
 }
 
 bool CarWash::isWashingStarted()
@@ -144,7 +144,7 @@ bool CarWash::isMaintenanceComplete()
 
 bool CarWash::isCarOutState()
 {
-    return state == CAR_OUT;
+    return this->state == CAR_OUT;
 }
 
 void CarWash::scroll()
@@ -154,7 +154,7 @@ void CarWash::scroll()
 
 String CarWash::getStateDescription()
 {
-    switch (state)
+    switch (this->state)
     {
     case INACTIVE:
         return String("Inactive");
