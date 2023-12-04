@@ -9,12 +9,12 @@ DisplayLcdI2C::DisplayLcdI2C()
     this->lcd->backlight();
     this->lcd->leftToRight();
 
-    this->lcd->createChar(0, zero);
-    this->lcd->createChar(1, one);
-    this->lcd->createChar(2, two);
-    this->lcd->createChar(3, three);
-    this->lcd->createChar(4, four);
-    this->lcd->createChar(5, five);
+    this->lcd->createChar(0, this->zero);
+    this->lcd->createChar(1, this->one);
+    this->lcd->createChar(2, this->two);
+    this->lcd->createChar(3, this->three);
+    this->lcd->createChar(4, this->four);
+    this->lcd->createChar(5, this->five);
 }
 
 void DisplayLcdI2C::on()
@@ -43,7 +43,7 @@ void DisplayLcdI2C::scroll()
 void DisplayLcdI2C::display(char string[])
 {
     this->clear();
-    lcd->print(string);
+    this->lcd->print(string);
     // Check id string is longer than 16 chars
     this->needScroll = strlen(string) > LCD_LENGHT;
 }
