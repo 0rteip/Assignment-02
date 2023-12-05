@@ -1,3 +1,12 @@
+/**
+ * Assignment 2 - Car Wash
+ *
+ * Authors:
+ * - Carabini Luca (luca.carabini@studio.unibo.it)
+ * - Ventrucci Pietro (pietro.ventrucci@studio.unibo.it)
+ *
+ */
+
 #include <Arduino.h>
 #include "config.h"
 #include "kernel/Scheduler.h"
